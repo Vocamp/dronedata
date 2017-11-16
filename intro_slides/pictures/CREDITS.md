@@ -1,2 +1,0 @@
-# Credits for slides
-drone_back.jpg [source](https://www.flickr.com/photos/131794563@N05/18258683505/in/photolist-tPswu2-nydPZj-d3zebG-d3zb9G-6Mu1D7-nAe2CJ-d3zbKU-6Mu1vm-d3zev9-sSBrQn-6i4JTC-sSBpxX-tPsa5i-6Q65xz-tx1fbn-pAt7Qe-d3zdc9-d3zcHG-d3ze51-d3zaZu-d3zaKq-d3zb4E-VWuHac-twRTNL-VTfaSu-d3zcDm-twZKGi-2FapAC-mWwT3n-ba5fDa-6Mu1Mo-niXUgd-UUv4Vx-nupg5r-d3zdWf-pKsTgQ-W92Gwp-ba5fxF-eqWrHW-nJRW37-d3zaWm-pv7T4k-9z3Fx3-niXWHL-dnJ1d1-mWxdQg-d3zbBw-nLPo9s-p3hABH-pMCtcS/) credit [http://www.boldcontentvideo.com](http://www.boldcontentvideo.com) CC BY 2.0
