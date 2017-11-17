@@ -25,6 +25,6 @@
 ## Methodology
 - [Why Vocamps](http://geog.ucsb.edu/~jano/2015-diversitypp-invited.pdf)
 - [Considerations regarding Ontology Design Patterns](https://pdfs.semanticscholar.org/b463/8c8029fdea73c981ac562e29417dc00807c2.pdf)
-- [\Linked vocabulary best practices](http://lov.okfn.org/Recommendations_Vocabulary_Design.pdf) and [Five Stars of Linked Data Vocabulary Use](http://geog.ucsb.edu/~jano/swj653.pdf)
 - [Chess ODP Worked Example]()
 - [ODP Tutorial from ESWC 2017](https://2017.eswc-conferences.org/sites/default/files/Slides-and-Materials/ESWC-2017-Modular-Ontology-Modeling-tutorial-slides.pdf)
+- [Linked vocabulary best practices](http://lov.okfn.org/Recommendations_Vocabulary_Design.pdf) and [Five Stars of Linked Data Vocabulary Use](http://geog.ucsb.edu/~jano/swj653.pdf)
