@@ -28,3 +28,13 @@
 - [Chess ODP Worked Example]()
 - [ODP Tutorial from ESWC 2017](https://2017.eswc-conferences.org/sites/default/files/Slides-and-Materials/ESWC-2017-Modular-Ontology-Modeling-tutorial-slides.pdf)
 - [Linked vocabulary best practices](http://lov.okfn.org/Recommendations_Vocabulary_Design.pdf) and [Five Stars of Linked Data Vocabulary Use](http://geog.ucsb.edu/~jano/swj653.pdf)
+
+## Real Sausage Making
+- [Tutorial](https://arxiv.org/pdf/1201.4089.pdf) primer on Description Logics
+- [OWL2 Tutorial Slides](http://www.semantic-web-book.org/w/images/b/b0/KI09-OWL-Rules-1.pdf)
+- [Official OWL2 Primer](https://www.w3.org/TR/owl2-primer/)
+- [Short SPARQL Tutorial](http://www.w3.org/2009/Talks/0615-qbe/) by Lee Feigenbaum's
+- [SPARQL Book](http://www.learningsparql.com/) by Bob DuCharme
+- [TDWG-RDF/OWL task group SPARQL Tutorial](https://code.google.com/archive/p/tdwg-rdf/wikis/Beginners6SPARQL.wiki)
+- [Linked Data Tools SPARQL Tutorial](http://www.linkeddatatools.com/querying-semantic-data)
+- [W3C SPARQL Resources](https://www.w3.org/TR/sparql11-query/)
