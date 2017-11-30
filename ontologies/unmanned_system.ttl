@@ -1,0 +1,144 @@
+@prefix : <http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix untitled-ontology-5: <http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#> .
+@base <http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5> .
+
+<http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#carries
+untitled-ontology-5:carries rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#hasPart
+untitled-ontology-5:hasPart rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#hasType
+untitled-ontology-5:hasType rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#inputFlightPlan
+untitled-ontology-5:inputFlightPlan rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#pridesC2Link
+untitled-ontology-5:pridesC2Link rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#Control_System
+untitled-ontology-5:Control_System rdf:type owl:Class ;
+                                   rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                     owl:onProperty [ owl:inverseOf untitled-ontology-5:hasPart
+                                                                    ] ;
+                                                     owl:someValuesFrom untitled-ontology-5:sUAS
+                                                   ] ,
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty [ owl:inverseOf untitled-ontology-5:pridesC2Link
+                                                                    ] ;
+                                                     owl:someValuesFrom untitled-ontology-5:groundControlSystem
+                                                   ] ;
+                                   rdfs:comment "The electronic flight management and navigation system that integrated with the drone platform. Ardupilot defines this as the embedded systems and peripheral sensors that act as the vehicle’s brain, eyes, ears, etc." .
+
+
+###  http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#Controller
+untitled-ontology-5:Controller rdf:type owl:Class ;
+                               rdfs:comment "Embedded microprocessor system used to control the trajectory of a robotic vehicle so as to maintain stable operation, through the reception of environmental sensors and command of actuators." .
+
+
+###  http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#Payload
+untitled-ontology-5:Payload rdf:type owl:Class ;
+                            rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                              owl:onProperty [ owl:inverseOf untitled-ontology-5:carries
+                                                             ] ;
+                                              owl:someValuesFrom untitled-ontology-5:Unmanned_Vehicle
+                                            ] ;
+                            rdfs:comment "The load carried by a uSAS exclusive of what is necessary for its operation; especially : the load carried by an sUAS consisting of things (such as instruments or pizza and/or beer) necessary to the purpose of the flight" ;
+                            rdfs:seeAlso "https://www.merriam-webster.com/dictionary/payload" .
+
+
+###  http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#Unmanned_Vehicle
+untitled-ontology-5:Unmanned_Vehicle rdf:type owl:Class ;
+                                     rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                       owl:onProperty untitled-ontology-5:carries ;
+                                                       owl:someValuesFrom untitled-ontology-5:Payload
+                                                     ] ,
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty untitled-ontology-5:hasType ;
+                                                       owl:someValuesFrom untitled-ontology-5:sUAS_Type
+                                                     ] ,
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty [ owl:inverseOf untitled-ontology-5:hasPart
+                                                                      ] ;
+                                                       owl:someValuesFrom untitled-ontology-5:sUAS
+                                                     ] ;
+                                     rdfs:comment "An uncrewed vehicle or unmanned vehicle is a vehicle without a person on board. Uncrewed vehicles can either be remote controlled or remote guided vehicles, or they can be autonomous vehicles which are capable of sensing their environment and navigating on their own." ;
+                                     rdfs:seeAlso "https://en.wikipedia.org/wiki/Uncrewed_vehicle" .
+
+
+###  http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#groundControlSystem
+untitled-ontology-5:groundControlSystem rdf:type owl:Class ;
+                                        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                          owl:onProperty untitled-ontology-5:pridesC2Link ;
+                                                          owl:someValuesFrom untitled-ontology-5:Control_System
+                                                        ] ,
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty [ owl:inverseOf untitled-ontology-5:inputFlightPlan
+                                                                         ] ;
+                                                          owl:someValuesFrom untitled-ontology-5:remotePilot
+                                                        ] ;
+                                        rdfs:comment """A ground control station (GCS) is a land- or sea-based control centre that provides the facilities for human control and/or monitoringof Unmanned Aerial Vehicles (UAVs) 
+https://en.wikipedia.org/wiki/Ground_control_station""" .
+
+
+###  http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#navagationSystem
+untitled-ontology-5:navagationSystem rdf:type owl:Class ;
+                                     rdfs:comment "Translates geospatial waypoints and/or velocity vectors recieved from either the ground or onboard control systems into lower level directives that the Controller can execute. Autonomous sUAS have a navigation system and simple sUAS do not." .
+
+
+###  http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#remotePilot
+untitled-ontology-5:remotePilot rdf:type owl:Class ;
+                                rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                  owl:onProperty untitled-ontology-5:inputFlightPlan ;
+                                                  owl:someValuesFrom untitled-ontology-5:groundControlSystem
+                                                ] ;
+                                rdfs:comment """A person who holds a remote pilot certificate with an sUAS rating and has the final authority and responsibility for the operation and safety of an sUAS operation conducted under part 107. OR
+The person who manipulates the flight controls of a remotely-piloted aircraft during flight time.""" ;
+                                rdfs:seeAlso "https://www.icao.int/Meetings/UAS/Documents/Circular%20328_en.pdf" .
+
+
+###  http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#sUAS
+untitled-ontology-5:sUAS rdf:type owl:Class ;
+                         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                           owl:onProperty untitled-ontology-5:hasPart ;
+                                           owl:someValuesFrom untitled-ontology-5:Control_System
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty untitled-ontology-5:hasPart ;
+                                           owl:someValuesFrom untitled-ontology-5:Unmanned_Vehicle
+                                         ] ;
+                         rdfs:comment "Small unmanned aircraft system. In the US a system under 55 lbs and bigger than 0.55 lbs as defined by the FAA." .
+
+
+###  http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#sUAS_Type
+untitled-ontology-5:sUAS_Type rdf:type owl:Class ;
+                              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                owl:onProperty [ owl:inverseOf untitled-ontology-5:hasType
+                                                               ] ;
+                                                owl:someValuesFrom untitled-ontology-5:Unmanned_Vehicle
+                                              ] ;
+                              rdfs:comment "Types of sUAS as catagorized by propulsion type and frame and flys." .
+
+
+###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi

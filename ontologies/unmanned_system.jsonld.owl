@@ -1,0 +1,251 @@
+[ {
+  "@id" : "_:genid1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Restriction" ],
+  "http://www.w3.org/2002/07/owl#onProperty" : [ {
+    "@id" : "_:genid2"
+  } ],
+  "http://www.w3.org/2002/07/owl#someValuesFrom" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#sUAS"
+  } ]
+}, {
+  "@id" : "_:genid10",
+  "http://www.w3.org/2002/07/owl#inverseOf" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#hasPart"
+  } ]
+}, {
+  "@id" : "_:genid11",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Restriction" ],
+  "http://www.w3.org/2002/07/owl#onProperty" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#pridesC2Link"
+  } ],
+  "http://www.w3.org/2002/07/owl#someValuesFrom" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#Control_System"
+  } ]
+}, {
+  "@id" : "_:genid12",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Restriction" ],
+  "http://www.w3.org/2002/07/owl#onProperty" : [ {
+    "@id" : "_:genid13"
+  } ],
+  "http://www.w3.org/2002/07/owl#someValuesFrom" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#remotePilot"
+  } ]
+}, {
+  "@id" : "_:genid13",
+  "http://www.w3.org/2002/07/owl#inverseOf" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#inputFlightPlan"
+  } ]
+}, {
+  "@id" : "_:genid14",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Restriction" ],
+  "http://www.w3.org/2002/07/owl#onProperty" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#inputFlightPlan"
+  } ],
+  "http://www.w3.org/2002/07/owl#someValuesFrom" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#groundControlSystem"
+  } ]
+}, {
+  "@id" : "_:genid15",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Restriction" ],
+  "http://www.w3.org/2002/07/owl#onProperty" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#hasPart"
+  } ],
+  "http://www.w3.org/2002/07/owl#someValuesFrom" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#Control_System"
+  } ]
+}, {
+  "@id" : "_:genid16",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Restriction" ],
+  "http://www.w3.org/2002/07/owl#onProperty" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#hasPart"
+  } ],
+  "http://www.w3.org/2002/07/owl#someValuesFrom" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#Unmanned_Vehicle"
+  } ]
+}, {
+  "@id" : "_:genid17",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Restriction" ],
+  "http://www.w3.org/2002/07/owl#onProperty" : [ {
+    "@id" : "_:genid18"
+  } ],
+  "http://www.w3.org/2002/07/owl#someValuesFrom" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#Unmanned_Vehicle"
+  } ]
+}, {
+  "@id" : "_:genid18",
+  "http://www.w3.org/2002/07/owl#inverseOf" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#hasType"
+  } ]
+}, {
+  "@id" : "_:genid2",
+  "http://www.w3.org/2002/07/owl#inverseOf" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#hasPart"
+  } ]
+}, {
+  "@id" : "_:genid3",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Restriction" ],
+  "http://www.w3.org/2002/07/owl#onProperty" : [ {
+    "@id" : "_:genid4"
+  } ],
+  "http://www.w3.org/2002/07/owl#someValuesFrom" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#groundControlSystem"
+  } ]
+}, {
+  "@id" : "_:genid4",
+  "http://www.w3.org/2002/07/owl#inverseOf" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#pridesC2Link"
+  } ]
+}, {
+  "@id" : "_:genid5",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Restriction" ],
+  "http://www.w3.org/2002/07/owl#onProperty" : [ {
+    "@id" : "_:genid6"
+  } ],
+  "http://www.w3.org/2002/07/owl#someValuesFrom" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#Unmanned_Vehicle"
+  } ]
+}, {
+  "@id" : "_:genid6",
+  "http://www.w3.org/2002/07/owl#inverseOf" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#carries"
+  } ]
+}, {
+  "@id" : "_:genid7",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Restriction" ],
+  "http://www.w3.org/2002/07/owl#onProperty" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#carries"
+  } ],
+  "http://www.w3.org/2002/07/owl#someValuesFrom" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#Payload"
+  } ]
+}, {
+  "@id" : "_:genid8",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Restriction" ],
+  "http://www.w3.org/2002/07/owl#onProperty" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#hasType"
+  } ],
+  "http://www.w3.org/2002/07/owl#someValuesFrom" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#sUAS_Type"
+  } ]
+}, {
+  "@id" : "_:genid9",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Restriction" ],
+  "http://www.w3.org/2002/07/owl#onProperty" : [ {
+    "@id" : "_:genid10"
+  } ],
+  "http://www.w3.org/2002/07/owl#someValuesFrom" : [ {
+    "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#sUAS"
+  } ]
+}, {
+  "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Ontology" ]
+}, {
+  "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#Control_System",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@value" : "The electronic flight management and navigation system that integrated with the drone platform. Ardupilot defines this as the embedded systems and peripheral sensors that act as the vehicle’s brain, eyes, ears, etc."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "_:genid1"
+  }, {
+    "@id" : "_:genid3"
+  } ]
+}, {
+  "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#Controller",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@value" : "Embedded microprocessor system used to control the trajectory of a robotic vehicle so as to maintain stable operation, through the reception of environmental sensors and command of actuators."
+  } ]
+}, {
+  "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#Payload",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@value" : "The load carried by a uSAS exclusive of what is necessary for its operation; especially : the load carried by an sUAS consisting of things (such as instruments or pizza and/or beer) necessary to the purpose of the flight"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#seeAlso" : [ {
+    "@value" : "https://www.merriam-webster.com/dictionary/payload"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "_:genid5"
+  } ]
+}, {
+  "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#Unmanned_Vehicle",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@value" : "An uncrewed vehicle or unmanned vehicle is a vehicle without a person on board. Uncrewed vehicles can either be remote controlled or remote guided vehicles, or they can be autonomous vehicles which are capable of sensing their environment and navigating on their own."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#seeAlso" : [ {
+    "@value" : "https://en.wikipedia.org/wiki/Uncrewed_vehicle"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "_:genid7"
+  }, {
+    "@id" : "_:genid8"
+  }, {
+    "@id" : "_:genid9"
+  } ]
+}, {
+  "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#carries",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ]
+}, {
+  "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#groundControlSystem",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@value" : "A ground control station (GCS) is a land- or sea-based control centre that provides the facilities for human control and/or monitoringof Unmanned Aerial Vehicles (UAVs) \nhttps://en.wikipedia.org/wiki/Ground_control_station"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "_:genid11"
+  }, {
+    "@id" : "_:genid12"
+  } ]
+}, {
+  "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#hasPart",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ]
+}, {
+  "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#hasType",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ]
+}, {
+  "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#inputFlightPlan",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ]
+}, {
+  "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#navagationSystem",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@value" : "Translates geospatial waypoints and/or velocity vectors recieved from either the ground or onboard control systems into lower level directives that the Controller can execute. Autonomous sUAS have a navigation system and simple sUAS do not."
+  } ]
+}, {
+  "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#pridesC2Link",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ]
+}, {
+  "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#remotePilot",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@value" : "A person who holds a remote pilot certificate with an sUAS rating and has the final authority and responsibility for the operation and safety of an sUAS operation conducted under part 107. OR\nThe person who manipulates the flight controls of a remotely-piloted aircraft during flight time."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#seeAlso" : [ {
+    "@value" : "https://www.icao.int/Meetings/UAS/Documents/Circular%20328_en.pdf"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "_:genid14"
+  } ]
+}, {
+  "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#sUAS",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@value" : "Small unmanned aircraft system. In the US a system under 55 lbs and bigger than 0.55 lbs as defined by the FAA."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "_:genid15"
+  }, {
+    "@id" : "_:genid16"
+  } ]
+}, {
+  "@id" : "http://www.semanticweb.org/cvardema/ontologies/2017/10/untitled-ontology-5#sUAS_Type",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@value" : "Types of sUAS as catagorized by propulsion type and frame and flys."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "_:genid17"
+  } ]
+} ]
