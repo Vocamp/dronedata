@@ -1,0 +1,106 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix schema: <http://schema.org/>.
+
+
+@prefix usascore: <http://w3id.org/suas/suascore/1.0/> .
+
+## Vocabulary <--> OWL definitions
+voaf:Vocabulary a owl:Class .
+dcterms:title a owl:AnnotationProperty .
+dcterms:description a owl:AnnotationProperty .
+dcterms:rights a owl:AnnotationProperty .
+dcterms:license a owl:AnnotationProperty .
+dcterms:created a owl:AnnotationProperty .
+dcterms:creator a owl:AnnotationProperty .
+skos:definition a owl:AnnotationProperty .
+skos:example a owl:AnnotationProperty .
+skos:note a owl:AnnotationProperty .
+vann:preferredNamespacePrefix a owl:AnnotationProperty .
+vann:preferredNamespaceUri a owl:AnnotationProperty .
+schema:domainIncludes a owl:AnnotationProperty .
+schema:rangeIncludes a owl:AnnotationProperty .
+time:TemporalEntity a owl:Class .
+
+
+# Define our vocabulary as a light weight ontology
+usascore: a owl:Ontology , voaf:Vocabulary ;
+  dcterms:title "Small Unmanned Arial Systems Core Ontology"@en ;
+  dcterms:description "This ontology is based on the SSN Ontology by the W3C Semantic Sensor Networks Incubator Group (SSN-XG), together with considerations from the W3C/OGC Spatial Data on the Web Working Group."@en ;
+#  dcterms:creator [ a foaf:Agent ; foaf:name "W3C/OGC Spatial Data on the Web Working Group"@en ] ;
+#  dcterms:rights "Copyright 2017 W3C/OGC." ;
+#  dcterms:license <http://www.w3.org/Consortium/Legal/2015/copyright-software-and-document> ;
+#  dcterms:license <http://www.opengeospatial.org/ogc/Software> ;
+#  dcterms:created "2017-04-17"^^xsd:date ;
+  vann:preferredNamespacePrefix "usascore" ;
+  vann:preferredNamespaceUri "http://w3id.org/usas/usascore/1.0/" ;
+  owl:versionInfo "1.0" .
+
+#################################################################
+#    Classes
+#################################################################
+
+usascore:sUAS rdf:type owl:Class ;
+  rdfs:label "Small Unmanned Aircraft System"@en ;
+  skos:definition "Small unmanned aircraft system. In the US a system under 55 lbs and bigger than 0.55 lbs as defined by the FAA." ;
+  rdfs:comment "Small unmanned aircraft system. In the US a system under 55 lbs and bigger than 0.55 lbs as defined by the FAA." ;
+  rdfs:isDefinedBy usascore: .
+
+## Components of a sUAS
+usascore:Payload rdf:type owl:Class ;
+  rdfs:label "Payload"@en ;
+  rdfs:comment "The load carried by a uSAS exclusive of what is necessary for its operation; especially : the load carried by an sUAS consisting of things (such as instruments or pizza and/or beer) necessary to the purpose of the flight" ;
+  skos:definition "The load carried by a uSAS exclusive of what is necessary for its operation; especially : the load carried by an sUAS consisting of things (such as instruments or pizza and/or beer) necessary to the purpose of the flight" ;
+  rdfs:isDefinedBy usacore: ;
+  rdfs:seeAlso "https://www.merriam-webster.com/dictionary/payload" .
+
+
+usascore:UnmannedVehicle rdf:type owl:Class ;
+  rdfs:label "Unmanned Vehicle"@en ;
+  skos:definition "An uncrewed vehicle or unmanned vehicle is a vehicle without a person on board. Uncrewed vehicles can either be remote controlled or remote guided vehicles, or they can be autonomous vehicles which are capable of sensing their environment and navigating on their own." ;
+  rdfs:comment "An uncrewed vehicle or unmanned vehicle is a vehicle without a person on board. Uncrewed vehicles can either be remote controlled or remote guided vehicles, or they can be autonomous vehicles which are capable of sensing their environment and navigating on their own." ;
+  rdfs:seeAlso "https://en.wikipedia.org/wiki/Uncrewed_vehicle" .
+
+
+usascore:ControlSystem rdf:type owl:Class ;
+   rdfs:label "Control System"@en ;
+   skos:definition "The electronic flight management and navigation system that integrated with the drone platform. Ardupilot defines this as the embedded systems and peripheral sensors that act as the vehicle’s brain, eyes, ears, etc." ;
+   rdfs:comment "The electronic flight management and navigation system that integrated with the drone platform. Ardupilot defines this as the embedded systems and peripheral sensors that act as the vehicle’s brain, eyes, ears, etc." ;
+   rdfs:isDefinedBy usascore: .
+
+usascore:Controller rdf:type owl:Class ;
+   rdfs:label "Controller"@en ;
+   rdfs:comment "Embedded microprocessor system used to control the trajectory of a robotic vehicle so as to maintain stable operation, through the reception of environmental sensors and command of actuators." ;
+   skos:definition "Embedded microprocessor system used to control the trajectory of a robotic vehicle so as to maintain stable operation, through the reception of environmental sensors and command of actuators." ;
+   rdfs:isDefinedBy usascore: .
+
+usascore:GroundControlSystem rdf:type owl:Class ;
+  rdfs:label "Ground Control System"@en ;
+  skos:definition """A ground control station (GCS) is a land- or sea-based control centre that provides the facilities for human control and/or monitoringof Unmanned Aerial Vehicles (UAVs).""" ;
+  rdfs:comment """A ground control station (GCS) is a land- or sea-based control centre that provides the facilities for human control and/or monitoringof Unmanned Aerial Vehicles (UAVs).""" ;
+  rdfs:seeAlso "https://en.wikipedia.org/wiki/Ground_control_station" ;
+  rdfs:isDefinedBy usascore: .
+
+
+usascore:NavagationSystem rdf:type owl:Class ;
+  rdfs:label "Navigation System"@en ;
+  skos:definition "Translates geospatial waypoints and/or velocity vectors recieved from either the ground or onboard control systems into lower level directives that the Controller can execute. Autonomous sUAS have a navigation system and simple sUAS do not." ;
+  rdfs:comment "Translates geospatial waypoints and/or velocity vectors recieved from either the ground or onboard control systems into lower level directives that the Controller can execute. Autonomous sUAS have a navigation system and simple sUAS do not." ;
+  rdfs:isDefinedBy usacore: .
+
+usacore:RemotePilot rdf:type owl:Class ;
+  rdfs:label "Remote Pilot"@en ;
+  skos:definition """A person who holds a remote pilot certificate with an sUAS rating and has the final authority and responsibility for the operation and safety of an sUAS operation conducted under part 107. OR The person who manipulates the flight controls of a remotely-piloted aircraft during flight time.""" ;
+  rdfs:comment """A person who holds a remote pilot certificate with an sUAS rating and has the final authority and responsibility for the operation and safety of an sUAS operation conducted under part 107. OR The person who manipulates the flight controls of a remotely-piloted aircraft during flight time.""" ;
+  rdfs:isDefinedBy usacore ;
+  rdfs:seeAlso "https://www.icao.int/Meetings/UAS/Documents/Circular%20328_en.pdf" .
+
+
