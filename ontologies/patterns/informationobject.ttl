@@ -1,0 +1,265 @@
+@prefix : <http://schema.geolink.org/1.0/pattern/informationobject#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix informationobject: <http://schema.geolink.org/1.0/pattern/informationobject#> .
+@base <http://schema.geolink.org/1.0/pattern/informationobject> .
+
+<http://schema.geolink.org/1.0/pattern/informationobject> rdf:type owl:Ontology ;
+                                                           owl:imports <http://schema.geolink.org/1.0/pattern/identifier> ;
+                                                           rdfs:comment "Information Object pattern captures informational aspect of the described object, which are not definitional in nature, e.g., alternative identifiers, webpages, textual description, etc." ;
+                                                           rdfs:label "GeoLink Information Object pattern" .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://schema.geolink.org/1.0/pattern/informationobject#describedBy
+informationobject:describedBy rdf:type owl:ObjectProperty ;
+                              rdfs:range informationobject:InformationObject ;
+                              rdfs:label "describedBy" .
+
+
+###  http://schema.geolink.org/1.0/pattern/informationobject#hasAlternativeIdentifier
+informationobject:hasAlternativeIdentifier rdf:type owl:ObjectProperty ;
+                                           rdfs:label "hasAlternativeIdentifier" .
+
+
+###  http://schema.geolink.org/1.0/pattern/informationobject#hasPrimaryIdentifier
+informationobject:hasPrimaryIdentifier rdf:type owl:ObjectProperty ;
+                                       rdfs:label "hasPrimaryIdentifier" .
+
+
+###  http://schema.geolink.org/1.0/pattern/informationobject#realizationAbout
+informationobject:realizationAbout rdf:type owl:ObjectProperty ;
+                                   rdfs:domain informationobject:InformationRealization ;
+                                   owl:propertyChainAxiom ( [ owl:inverseOf informationobject:realizedBy
+                                                            ]
+                                                            [ owl:inverseOf informationobject:describedBy
+                                                            ]
+                                                          ) ;
+                                   rdfs:label "realizationAbout" .
+
+
+###  http://schema.geolink.org/1.0/pattern/informationobject#realizedBy
+informationobject:realizedBy rdf:type owl:ObjectProperty ;
+                             rdfs:label "realizedBy" .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://schema.geolink.org/1.0/pattern/informationobject#alsoKnownAs
+informationobject:alsoKnownAs rdf:type owl:DatatypeProperty ;
+                              rdfs:comment "Provides the name alias of the object/entity described by this information object." ;
+                              rdfs:label "alsoKnownAs" .
+
+
+###  http://schema.geolink.org/1.0/pattern/informationobject#hasCanonicalName
+informationobject:hasCanonicalName rdf:type owl:DatatypeProperty ;
+                                   rdfs:label "hasCanonicalName" .
+
+
+###  http://schema.geolink.org/1.0/pattern/informationobject#hasDescription
+informationobject:hasDescription rdf:type owl:DatatypeProperty ;
+                                 rdfs:label "hasDescription" .
+
+
+###  http://schema.geolink.org/1.0/pattern/informationobject#hasWebpage
+informationobject:hasWebpage rdf:type owl:DatatypeProperty ;
+                             rdfs:label "hasWebpage" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://schema.geolink.org/1.0/pattern/identifier#Identifier
+<http://schema.geolink.org/1.0/pattern/identifier#Identifier> rdfs:subClassOf [ rdf:type owl:Class ;
+                                                                                owl:complementOf [ rdf:type owl:Restriction ;
+                                                                                                   owl:onProperty informationobject:describedBy ;
+                                                                                                   owl:someValuesFrom informationobject:InformationObject
+                                                                                                 ]
+                                                                              ] .
+
+
+###  http://schema.geolink.org/1.0/pattern/informationobject#InformationObject
+informationobject:InformationObject rdf:type owl:Class ;
+                                    rdfs:subClassOf [ rdf:type owl:Class ;
+                                                      owl:complementOf [ rdf:type owl:Restriction ;
+                                                                         owl:onProperty informationobject:describedBy ;
+                                                                         owl:someValuesFrom informationobject:InformationObject
+                                                                       ]
+                                                    ] ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty informationobject:hasAlternativeIdentifier ;
+                                                      owl:allValuesFrom <http://schema.geolink.org/1.0/pattern/identifier#Identifier>
+                                                    ] ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty informationobject:hasPrimaryIdentifier ;
+                                                      owl:allValuesFrom <http://schema.geolink.org/1.0/pattern/identifier#Identifier>
+                                                    ] ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty informationobject:realizedBy ;
+                                                      owl:allValuesFrom informationobject:InformationRealization
+                                                    ] ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty [ owl:inverseOf informationobject:describedBy
+                                                                     ] ;
+                                                      owl:cardinality "1"^^xsd:nonNegativeInteger
+                                                    ] ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty informationobject:alsoKnownAs ;
+                                                      owl:allValuesFrom xsd:string
+                                                    ] ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty informationobject:hasCanonicalName ;
+                                                      owl:allValuesFrom xsd:string
+                                                    ] ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty informationobject:hasDescription ;
+                                                      owl:allValuesFrom xsd:string
+                                                    ] ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty informationobject:hasWebpage ;
+                                                      owl:allValuesFrom xsd:anyURI
+                                                    ] ;
+                                    rdfs:comment "An InformationObject describes informational aspect of the described object, which are not definitional in nature, e.g., alternative identifiers, webpages, textual description, etc." ;
+                                    rdfs:label "InformationObject" .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource informationobject:InformationObject ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget [ rdf:type owl:Restriction ;
+                         owl:onProperty informationobject:realizedBy ;
+                         owl:allValuesFrom informationobject:InformationRealization
+                       ] ;
+   rdfs:comment "Range of realizedBy is InformationRealization  (guard: InformationObject)"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource informationobject:InformationObject ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget [ rdf:type owl:Restriction ;
+                         owl:onProperty informationobject:alsoKnownAs ;
+                         owl:allValuesFrom xsd:string
+                       ] ;
+   rdfs:comment "Range of alsoKnownAs is xsd:string  (guard: InformationObject)"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource informationobject:InformationObject ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget [ rdf:type owl:Restriction ;
+                         owl:onProperty informationobject:hasCanonicalName ;
+                         owl:allValuesFrom xsd:string
+                       ] ;
+   rdfs:comment "Range of hasCanonicalName is xsd:string  (guard: InformationObject)"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource informationobject:InformationObject ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget [ rdf:type owl:Restriction ;
+                         owl:onProperty informationobject:hasDescription ;
+                         owl:allValuesFrom xsd:string
+                       ] ;
+   rdfs:comment "Range of hasDescription is xsd:string  (guard: InformationObject)"
+ ] .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource informationobject:InformationObject ;
+   owl:annotatedProperty rdfs:subClassOf ;
+   owl:annotatedTarget [ rdf:type owl:Restriction ;
+                         owl:onProperty informationobject:hasWebpage ;
+                         owl:allValuesFrom xsd:anyURI
+                       ] ;
+   rdfs:comment "Range of hasWebpage is xsd:anyURI  (guard: InformationObject)"
+ ] .
+
+
+###  http://schema.geolink.org/1.0/pattern/informationobject#InformationRealization
+informationobject:InformationRealization rdf:type owl:Class ;
+                                         rdfs:subClassOf [ rdf:type owl:Class ;
+                                                           owl:complementOf [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty informationobject:describedBy ;
+                                                                              owl:someValuesFrom informationobject:InformationObject
+                                                                            ]
+                                                         ] ;
+                                         rdfs:comment "Some InformationObjects may be realized in some concrete manifestation, e.g., different digital copies of a publication. InformationRealization captures such manifestations." ;
+                                         rdfs:label "InformationRealization" .
+
+
+###  http://www.w3.org/2002/07/owl#Thing
+owl:Thing rdfs:subClassOf [ rdf:type owl:Restriction ;
+                            owl:onProperty informationobject:describedBy ;
+                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass informationobject:InformationObject
+                          ] .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty informationobject:hasAlternativeIdentifier ;
+  owl:someValuesFrom <http://schema.geolink.org/1.0/pattern/identifier#Identifier> ;
+  rdfs:subClassOf informationobject:InformationObject
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty informationobject:hasPrimaryIdentifier ;
+  owl:someValuesFrom <http://schema.geolink.org/1.0/pattern/identifier#Identifier> ;
+  rdfs:subClassOf informationobject:InformationObject
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty informationobject:realizedBy ;
+  owl:someValuesFrom informationobject:InformationRealization ;
+  rdfs:subClassOf informationobject:InformationObject
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty informationobject:alsoKnownAs ;
+  owl:someValuesFrom xsd:string ;
+  rdfs:subClassOf informationobject:InformationObject
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty informationobject:hasCanonicalName ;
+  owl:someValuesFrom xsd:string ;
+  rdfs:subClassOf informationobject:InformationObject
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty informationobject:hasDescription ;
+  owl:someValuesFrom xsd:string ;
+  rdfs:subClassOf informationobject:InformationObject
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty informationobject:hasWebpage ;
+  owl:someValuesFrom xsd:anyURI ;
+  rdfs:subClassOf informationobject:InformationObject
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( <http://schema.geolink.org/1.0/pattern/identifier#Identifier>
+                informationobject:InformationObject
+                informationobject:InformationRealization
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi

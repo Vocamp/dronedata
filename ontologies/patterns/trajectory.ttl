@@ -1,0 +1,352 @@
+@prefix : <http://schema.geolink.org/1.0/pattern/trajectory#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@prefix trajectory: <http://schema.geolink.org/1.0/pattern/trajectory#> .
+@base <http://schema.geolink.org/1.0/pattern/trajectory> .
+
+<http://schema.geolink.org/1.0/pattern/trajectory> rdf:type owl:Ontology ;
+                                                    owl:imports <http://www.opengis.net/ont/geosparql> ,
+                                                                <http://www.w3.org/2006/time> ;
+                                                    rdfs:comment """A trajectory is given by a collection of fixes, representing time-stamped locations. Non-spatiotemporal information specific to a fix can be included by assigning it some attributes, for example, to indicate that the fix is the arrival to some port stop. The ordering of the fixes is based on their temporal information, although such an ordering is not axiomatized in this pattern. Between two consecutive fixes, we can define a segment, which is traversed by some moving object. There is no requirement forcing that all segments in the trajectory can only be traversed by the same moving object.
+
+In this model, it is assumed that the data provides the fixes in some linear sequence, which is motivated by real scenarios whereby indeed only properties of fixes will often be known, in particular their locations, and temporal extension, whether they are at ports, whether they are arrival or departure fixes from ports, and in which sequence the fixes occurred. This pattern instantiates the segments from the fixes. The traversing vessel will usually also be known. However, those segments to which the trajectory pattern attaches information about the vessel are usually not explicitly represented in the data.""" ;
+                                                    rdfs:label "GeoLink Semantic Trajectory pattern" .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://schema.geolink.org/1.0/pattern/trajectory#atTime
+trajectory:atTime rdf:type owl:ObjectProperty ;
+                  rdfs:comment "Provides temporal information of a fix." ;
+                  rdfs:label "atTime" .
+
+
+###  http://schema.geolink.org/1.0/pattern/trajectory#endsAtFix
+trajectory:endsAtFix rdf:type owl:ObjectProperty ;
+                     owl:propertyChainAxiom ( trajectory:startsFromFix
+                                              trajectory:hasNextFix
+                                            ) ;
+                     rdfs:comment "Provides the fix where the segment ends." ;
+                     rdfs:label "endsAtFix" .
+
+
+###  http://schema.geolink.org/1.0/pattern/trajectory#hasAttribute
+trajectory:hasAttribute rdf:type owl:ObjectProperty ;
+                        rdfs:comment "Provides an attribute of a fix or a segment." ;
+                        rdfs:label "hasAttribute" .
+
+
+###  http://schema.geolink.org/1.0/pattern/trajectory#hasDataSource
+trajectory:hasDataSource rdf:type owl:ObjectProperty ;
+                         rdfs:comment "Provides the source (e.g., a sensor, a device, etc.) from which information about the fix was obtained." ;
+                         rdfs:label "hasDataSource" .
+
+
+###  http://schema.geolink.org/1.0/pattern/trajectory#hasFix
+trajectory:hasFix rdf:type owl:ObjectProperty ;
+                  owl:propertyChainAxiom ( trajectory:hasFix
+                                           trajectory:hasNextFix
+                                         ) ;
+                  rdfs:comment "Provides a fix for the trajectory." ;
+                  rdfs:label "hasFix" .
+
+
+###  http://schema.geolink.org/1.0/pattern/trajectory#hasNextFix
+trajectory:hasNextFix rdf:type owl:ObjectProperty ,
+                               owl:FunctionalProperty ;
+                      rdfs:comment "Provides the next fix after this fix in the sequence." ;
+                      rdfs:label "hasNextFix" .
+
+
+###  http://schema.geolink.org/1.0/pattern/trajectory#hasPosition
+trajectory:hasPosition rdf:type owl:ObjectProperty ;
+                       rdfs:comment "Provides a geographical location of a fix." ;
+                       rdfs:label "hasPosition" .
+
+
+###  http://schema.geolink.org/1.0/pattern/trajectory#hasSegment
+trajectory:hasSegment rdf:type owl:ObjectProperty ;
+                      owl:propertyChainAxiom ( trajectory:hasFix
+                                               [ owl:inverseOf trajectory:startsFromFix
+                                               ]
+                                             ) ;
+                      rdfs:comment "Provides a segment of the trajectory." ;
+                      rdfs:label "hasSegment" .
+
+
+###  http://schema.geolink.org/1.0/pattern/trajectory#startsFromFix
+trajectory:startsFromFix rdf:type owl:ObjectProperty ,
+                                  owl:FunctionalProperty ;
+                         rdfs:comment "Provides the fix from which the segment starts." ;
+                         rdfs:label "startsFromFix" .
+
+
+###  http://schema.geolink.org/1.0/pattern/trajectory#traversedBy
+trajectory:traversedBy rdf:type owl:ObjectProperty ;
+                       rdfs:comment "Provides a moving object that traverses the segment." ;
+                       rdfs:label "traversedBy" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://schema.geolink.org/1.0/pattern/trajectory#Attribute
+trajectory:Attribute rdf:type owl:Class ;
+                     rdfs:comment "Represents all kinds of attributes of a fix or a segment in a trajectory." ;
+                     rdfs:label "Attribute" .
+
+
+###  http://schema.geolink.org/1.0/pattern/trajectory#EndingFix
+trajectory:EndingFix rdf:type owl:Class ;
+                     owl:equivalentClass [ owl:intersectionOf ( trajectory:Fix
+                                                                [ rdf:type owl:Class ;
+                                                                  owl:complementOf [ rdf:type owl:Restriction ;
+                                                                                     owl:onProperty trajectory:hasNextFix ;
+                                                                                     owl:someValuesFrom trajectory:Fix
+                                                                                   ]
+                                                                ]
+                                                              ) ;
+                                           rdf:type owl:Class
+                                         ] ;
+                     rdfs:comment "An instance of EndingFix represents the final fix in the specification of a trajectory" ;
+                     rdfs:label "EndingFix" .
+
+
+###  http://schema.geolink.org/1.0/pattern/trajectory#Fix
+trajectory:Fix rdf:type owl:Class ;
+               rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                 owl:onProperty trajectory:atTime ;
+                                 owl:someValuesFrom <http://www.w3.org/2006/time#TemporalEntity>
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty trajectory:hasPosition ;
+                                 owl:someValuesFrom trajectory:Position
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty [ owl:inverseOf trajectory:hasFix
+                                                ] ;
+                                 owl:someValuesFrom trajectory:Trajectory
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty trajectory:atTime ;
+                                 owl:allValuesFrom <http://www.w3.org/2006/time#TemporalEntity>
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty trajectory:hasAttribute ;
+                                 owl:allValuesFrom trajectory:Attribute
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty trajectory:hasDataSource ;
+                                 owl:allValuesFrom trajectory:Source
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty trajectory:hasNextFix ;
+                                 owl:allValuesFrom trajectory:Fix
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty trajectory:hasPosition ;
+                                 owl:allValuesFrom trajectory:Position
+                               ] ;
+               rdfs:comment "A fix represents a spatiotemporal point in the specification of a trajectory.  A fix has a location and a time stamp, and always belongs to one particular trajectory. Also, a fix cannot be followed by more than one other fix, and cannot follow itself. This gives a linear structure in the ordering of the fixes." ;
+               rdfs:label "Fix" .
+
+
+###  http://schema.geolink.org/1.0/pattern/trajectory#MovingObject
+trajectory:MovingObject rdf:type owl:Class ;
+                        rdfs:label "MovingObject" .
+
+
+###  http://schema.geolink.org/1.0/pattern/trajectory#Position
+trajectory:Position rdf:type owl:Class ;
+                    rdfs:subClassOf <http://www.opengis.net/ont/gml#Point> ,
+                                    <http://www.opengis.net/ont/sf#Point> ;
+                    rdfs:comment "Represents a geospatial location associated with a fix in the trajectory of a cruise. A position is understood as a point in either 2D or 3D space." ;
+                    rdfs:label "Position" .
+
+
+###  http://schema.geolink.org/1.0/pattern/trajectory#Segment
+trajectory:Segment rdf:type owl:Class ;
+                   rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                     owl:onProperty trajectory:endsAtFix ;
+                                     owl:someValuesFrom trajectory:Fix
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty trajectory:startsFromFix ;
+                                     owl:someValuesFrom trajectory:Fix
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty [ owl:inverseOf trajectory:hasSegment
+                                                    ] ;
+                                     owl:someValuesFrom trajectory:Trajectory
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty trajectory:endsAtFix ;
+                                     owl:allValuesFrom trajectory:Fix
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty trajectory:hasAttribute ;
+                                     owl:allValuesFrom trajectory:Attribute
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty trajectory:startsFromFix ;
+                                     owl:allValuesFrom trajectory:Fix
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty trajectory:traversedBy ;
+                                     owl:allValuesFrom trajectory:MovingObject
+                                   ] ;
+                   rdfs:comment "A segment starts from exactly one fix, and for every fix with a successor fix, there is a segment that starts from it. If a fix belongs to a trajectory and there is a segment that starts from this fix, then the segment belongs to the trajectory. Furthermore, if a segment starts from a fix, then it ends at the successor of the fix." ;
+                   rdfs:label "Segment" .
+
+
+###  http://schema.geolink.org/1.0/pattern/trajectory#Source
+trajectory:Source rdf:type owl:Class ;
+                  rdfs:label "Source" .
+
+
+###  http://schema.geolink.org/1.0/pattern/trajectory#StartingFix
+trajectory:StartingFix rdf:type owl:Class ;
+                       owl:equivalentClass [ owl:intersectionOf ( trajectory:Fix
+                                                                  [ rdf:type owl:Class ;
+                                                                    owl:complementOf [ rdf:type owl:Restriction ;
+                                                                                       owl:onProperty [ owl:inverseOf trajectory:hasNextFix
+                                                                                                      ] ;
+                                                                                       owl:someValuesFrom trajectory:Fix
+                                                                                     ]
+                                                                  ]
+                                                                ) ;
+                                             rdf:type owl:Class
+                                           ] ;
+                       rdfs:comment "An instance of StartingFix represents the first fix in a specification of a trajectory.  A trajectory is linked to at least two consecutive fixes where the first fix is the starting fix." ;
+                       rdfs:label "StartingFix" .
+
+
+###  http://schema.geolink.org/1.0/pattern/trajectory#Trajectory
+trajectory:Trajectory rdf:type owl:Class ;
+                      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                        owl:onProperty trajectory:hasFix ;
+                                        owl:someValuesFrom trajectory:StartingFix
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty trajectory:hasFix ;
+                                        owl:allValuesFrom trajectory:Fix
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty trajectory:hasSegment ;
+                                        owl:allValuesFrom trajectory:Segment
+                                      ] ;
+                      rdfs:comment "This class serves as the main access point of the pattern." ;
+                      rdfs:label "Trajectory" .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty trajectory:atTime ;
+  owl:someValuesFrom <http://www.w3.org/2006/time#TemporalEntity> ;
+  rdfs:subClassOf trajectory:Fix
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty trajectory:endsAtFix ;
+  owl:someValuesFrom trajectory:Fix ;
+  rdfs:subClassOf trajectory:Segment
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty trajectory:hasAttribute ;
+  owl:someValuesFrom trajectory:Attribute ;
+  rdfs:subClassOf [ rdf:type owl:Class ;
+                    owl:unionOf ( trajectory:Fix
+                                  trajectory:Segment
+                                )
+                  ]
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty trajectory:hasDataSource ;
+  owl:someValuesFrom trajectory:Source ;
+  rdfs:subClassOf trajectory:Fix
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty trajectory:hasFix ;
+  owl:someValuesFrom trajectory:Fix ;
+  rdfs:subClassOf trajectory:Trajectory
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty trajectory:hasNextFix ;
+  owl:someValuesFrom trajectory:Fix ;
+  rdfs:subClassOf trajectory:Fix
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty trajectory:hasNextFix ;
+  owl:someValuesFrom trajectory:Fix ;
+  rdfs:subClassOf [ rdf:type owl:Restriction ;
+                    owl:onProperty [ owl:inverseOf trajectory:startsFromFix
+                                   ] ;
+                    owl:someValuesFrom trajectory:Segment
+                  ]
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty trajectory:hasPosition ;
+  owl:someValuesFrom trajectory:Position ;
+  rdfs:subClassOf trajectory:Fix
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty trajectory:hasSegment ;
+  owl:someValuesFrom trajectory:Segment ;
+  rdfs:subClassOf trajectory:Trajectory
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty trajectory:startsFromFix ;
+  owl:someValuesFrom trajectory:Fix ;
+  rdfs:subClassOf trajectory:Segment
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty trajectory:traversedBy ;
+  owl:someValuesFrom trajectory:MovingObject ;
+  rdfs:subClassOf trajectory:Segment
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( trajectory:Attribute
+                trajectory:Fix
+                trajectory:MovingObject
+                trajectory:Position
+                trajectory:Segment
+                trajectory:Source
+                trajectory:Trajectory
+                <http://www.w3.org/2006/time#TemporalEntity>
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi
