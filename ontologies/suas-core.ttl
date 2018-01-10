@@ -12,6 +12,7 @@
 
 
 @prefix usascore: <http://w3id.org/suas/suascore/1.0/> .
+@base http://w3id.org/suas/suascore/1.0/> .
 
 ## Vocabulary <--> OWL definitions
 voaf:Vocabulary a owl:Class .
@@ -40,9 +41,9 @@ usascore: a owl:Ontology , voaf:Vocabulary ;
 #  dcterms:license <http://www.w3.org/Consortium/Legal/2015/copyright-software-and-document> ;
 #  dcterms:license <http://www.opengeospatial.org/ogc/Software> ;
 #  dcterms:created "2017-04-17"^^xsd:date ;
-  vann:preferredNamespacePrefix "usascore" ;
-  vann:preferredNamespaceUri "http://w3id.org/usas/usascore/1.0/" ;
-  owl:versionInfo "1.0" .
+  vann:preferredNamespacePrefix "usascore"^^xsd:string ;
+  vann:preferredNamespaceUri "http://w3id.org/usas/usascore/1.0/"^^xsd:string ;
+  owl:versionInfo "1.0"^^xsd:string .
 
 #################################################################
 #    Classes

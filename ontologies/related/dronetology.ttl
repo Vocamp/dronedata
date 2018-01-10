@@ -1,0 +1,1962 @@
+@prefix : <http://www.dronetology.net/dronetology#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix ns: <http://creativecommons.org/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sco: <http://purl.org/ontology/sco#> .
+@prefix www: <http://www.dronetology.net/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix xsp: <http://www.owl-ontologies.com/2005/08/07/xsp.owl#> .
+@prefix iron: <http://purl.org/ontology/iron#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix swrl: <http://www.w3.org/2003/11/swrl#> .
+@prefix drone: <http://www.dronetology.net/dronetology#> .
+@prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@prefix protege: <http://protege.stanford.edu/plugins/owl/protege#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix WeatherOntology: <https://www.auto.tuwien.ac.at/downloads/thinkhome/ontology/WeatherOntology.owl#> .
+@base <http://www.dronetology.net/dronetology> .
+
+<http://www.dronetology.net/dronetology> rdf:type owl:Ontology ;
+                                          owl:imports <http://purl.oclc.org/NET/ssnx/ssn> ,
+                                                      <https://www.auto.tuwien.ac.at/downloads/thinkhome/ontology/WeatherOntology.owl> ;
+                                          dc:rights ""^^xsd:string ;
+                                          dc:contributor "Jesus Villadangos"^^xsd:string ,
+                                                         "Alberto Cordoba"^^xsd:string ,
+                                                         "Jose Javier Astrain"^^xsd:string ;
+                                          dc:abstract """The objetive of the ontology is to define autonomous improvement in drone flight with an ontologie. Beyond Visual
+Range automatic flight is one of the key features of drones but are difficult to manage when a unexpected event
+occur: multiple near drones, weather conditions changes, ..."""^^xsd:string ;
+                                          dc:title "The Drone Ontology"^^xsd:string ;
+                                          dc:creator "David Martín Lammerding"^^xsd:string ;
+                                          dc:subject ""^^xsd:string .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/description
+dc:description rdf:type owl:AnnotationProperty .
+
+
+###  http://www.dronetology.net/hasInterval
+www:hasInterval rdf:type owl:AnnotationProperty .
+
+
+###  http://www.dronetology.net/hasLatLon
+www:hasLatLon rdf:type owl:AnnotationProperty .
+
+
+###  http://www.dronetology.net/hasParameterUnit
+www:hasParameterUnit rdf:type owl:AnnotationProperty .
+
+
+###  http://www.dronetology.net/hasParameterValue
+www:hasParameterValue rdf:type owl:AnnotationProperty .
+
+
+###  http://www.dronetology.net/dronetology#hasMeasurementZValue
+drone:hasMeasurementZValue rdf:type owl:AnnotationProperty ;
+                           rdfs:range xsd:float ;
+                           rdfs:domain drone:Parameter ,
+                                       drone:VectorParameter .
+
+
+###  http://www.dronetology.net/dronetology#hasParameterName
+drone:hasParameterName rdf:type owl:AnnotationProperty ;
+                       rdfs:range xsd:string ;
+                       rdfs:domain drone:Parameter .
+
+
+###  http://www.w3.org/2002/07/owl#qualifiedCardinality
+owl:qualifiedCardinality rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#location
+wgs84_pos:location rdf:type owl:AnnotationProperty ;
+                   rdfs:subPropertyOf <http://xmlns.com/foaf/0.1/based_near> .
+
+
+###  http://xmlns.com/foaf/0.1/based_near
+<http://xmlns.com/foaf/0.1/based_near> rdf:type owl:AnnotationProperty .
+
+
+###  https://www.auto.tuwien.ac.at/downloads/thinkhome/ontology/WeatherOntology.owl#hasEndTime
+WeatherOntology:hasEndTime rdf:type owl:AnnotationProperty .
+
+
+###  https://www.auto.tuwien.ac.at/downloads/thinkhome/ontology/WeatherOntology.owl#hasStartTime
+WeatherOntology:hasStartTime rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.dronetology.net/dronetology#constrains
+drone:constrains rdf:type owl:ObjectProperty ;
+                 rdfs:domain drone:Constraint ;
+                 rdfs:range drone:Parameter .
+
+
+###  http://www.dronetology.net/dronetology#hasAntenna
+drone:hasAntenna rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf drone:hasDirectPart ;
+                 owl:inverseOf drone:isAntennaOf ;
+                 rdfs:domain drone:Component ;
+                 rdfs:range drone:Antenna .
+
+
+###  http://www.dronetology.net/dronetology#hasBattery
+drone:hasBattery rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf drone:hasDirectPart ;
+                 owl:inverseOf drone:isBatteryOf ;
+                 rdfs:domain drone:ProductModel ;
+                 rdfs:range drone:Battery .
+
+
+###  http://www.dronetology.net/dronetology#hasCategory
+drone:hasCategory rdf:type owl:ObjectProperty ;
+                  rdfs:domain drone:ProductModel ;
+                  rdfs:range drone:Category .
+
+
+###  http://www.dronetology.net/dronetology#hasChargingStation
+drone:hasChargingStation rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf drone:hasDirectPart ;
+                         owl:inverseOf drone:isChargingStationOf ;
+                         rdfs:domain drone:ProductModel ;
+                         rdfs:range drone:ChargingStation .
+
+
+###  http://www.dronetology.net/dronetology#hasCombustionEngine
+drone:hasCombustionEngine rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf drone:hasDirectPart ;
+                          owl:inverseOf drone:isCombustionEngineOf ;
+                          rdfs:domain drone:ProductModel ;
+                          rdfs:range drone:CombustionEngine .
+
+
+###  http://www.dronetology.net/dronetology#hasDataProcessingBoard
+drone:hasDataProcessingBoard rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf drone:hasDirectPart ;
+                             owl:inverseOf drone:isDataProcessingBoard ;
+                             rdfs:domain drone:ProductModel ;
+                             rdfs:range drone:DataProcessingBoard .
+
+
+###  http://www.dronetology.net/dronetology#hasDataStorage
+drone:hasDataStorage rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf drone:hasDirectPart ;
+                     owl:inverseOf drone:isDataStorageOf ;
+                     rdfs:domain drone:ProductModel ;
+                     rdfs:range drone:DataStorage .
+
+
+###  http://www.dronetology.net/dronetology#hasDirectPart
+drone:hasDirectPart rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf drone:hasPart ;
+                    rdfs:domain drone:Component ;
+                    rdfs:range drone:Component .
+
+
+###  http://www.dronetology.net/dronetology#hasElectricalEngine
+drone:hasElectricalEngine rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf drone:hasDirectPart ;
+                          owl:inverseOf drone:isElectricalEngineOf ;
+                          rdfs:domain drone:ProductModel ;
+                          rdfs:range drone:ElectricalEngine .
+
+
+###  http://www.dronetology.net/dronetology#hasElement
+drone:hasElement rdf:type owl:ObjectProperty ;
+                 rdfs:domain drone:Mission ;
+                 rdfs:range drone:MissionElement .
+
+
+###  http://www.dronetology.net/dronetology#hasExpression
+drone:hasExpression rdf:type owl:ObjectProperty ;
+                    rdfs:domain drone:Requirement ;
+                    rdfs:range drone:Constraint .
+
+
+###  http://www.dronetology.net/dronetology#hasFeature
+drone:hasFeature rdf:type owl:ObjectProperty ;
+                 rdfs:domain drone:Component ;
+                 rdfs:range drone:Feature .
+
+
+###  http://www.dronetology.net/dronetology#hasFlightController
+drone:hasFlightController rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf drone:hasDirectPart ;
+                          owl:inverseOf drone:isFlightControllerOf ;
+                          rdfs:domain drone:ProductModel ;
+                          rdfs:range drone:FlightController .
+
+
+###  http://www.dronetology.net/dronetology#hasFuelTank
+drone:hasFuelTank rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf drone:hasDirectPart ;
+                  owl:inverseOf drone:isFuelTankOf ;
+                  rdfs:domain drone:ProductModel ;
+                  rdfs:range drone:FuelTank .
+
+
+###  http://www.dronetology.net/dronetology#hasFunction
+drone:hasFunction rdf:type owl:ObjectProperty ;
+                  rdfs:domain drone:Component ;
+                  rdfs:range drone:Function .
+
+
+###  http://www.dronetology.net/dronetology#hasFuselage
+drone:hasFuselage rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf drone:hasDirectPart ;
+                  owl:inverseOf drone:isFuselageOf ;
+                  rdfs:domain drone:ProductModel ;
+                  rdfs:range drone:Fuselage .
+
+
+###  http://www.dronetology.net/dronetology#hasGroundStation
+drone:hasGroundStation rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf drone:hasDirectPart ;
+                       owl:inverseOf drone:isGroundStationOf ;
+                       rdfs:domain drone:ProductModel ;
+                       rdfs:range drone:GroundStation .
+
+
+###  http://www.dronetology.net/dronetology#hasInertialNavigationSystem
+drone:hasInertialNavigationSystem rdf:type owl:ObjectProperty ;
+                                  rdfs:subPropertyOf drone:hasDirectPart ;
+                                  owl:inverseOf drone:isInertialNavigationSystemOf ;
+                                  rdfs:domain drone:ProductModel ;
+                                  rdfs:range drone:InertialNavigationSystem .
+
+
+###  http://www.dronetology.net/dronetology#hasLandingSystem
+drone:hasLandingSystem rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf drone:hasDirectPart ;
+                       owl:inverseOf drone:isLandingSystemOf ;
+                       rdfs:domain drone:ProductModel ;
+                       rdfs:range drone:LandingSystem .
+
+
+###  http://www.dronetology.net/dronetology#hasLaunchSystem
+drone:hasLaunchSystem rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf drone:hasDirectPart ;
+                      owl:inverseOf drone:isLaunchSystemOf ;
+                      rdfs:domain drone:ProductModel ;
+                      rdfs:range drone:LaunchSystem .
+
+
+###  http://www.dronetology.net/dronetology#hasManufacturer
+drone:hasManufacturer rdf:type owl:ObjectProperty ;
+                      rdfs:domain drone:ProductModel ;
+                      rdfs:range drone:Manufacturer .
+
+
+###  http://www.dronetology.net/dronetology#hasMission
+drone:hasMission rdf:type owl:ObjectProperty ;
+                 owl:inverseOf drone:isMissionOf ;
+                 rdfs:domain drone:Drone ;
+                 rdfs:range drone:Mission .
+
+
+###  http://www.dronetology.net/dronetology#hasModel
+drone:hasModel rdf:type owl:ObjectProperty ;
+               rdfs:domain drone:Drone ;
+               rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#hasParameter
+drone:hasParameter rdf:type owl:ObjectProperty ;
+                   rdfs:domain drone:Component ,
+                               drone:Feature ;
+                   rdfs:range drone:Parameter .
+
+
+###  http://www.dronetology.net/dronetology#hasPart
+drone:hasPart rdf:type owl:ObjectProperty ;
+              owl:inverseOf drone:isPartOf ;
+              rdf:type owl:TransitiveProperty ;
+              rdfs:domain drone:Component ;
+              rdfs:range drone:Component .
+
+
+###  http://www.dronetology.net/dronetology#hasPayload
+drone:hasPayload rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf drone:hasDirectPart ;
+                 owl:inverseOf drone:isPayloadOf ;
+                 rdfs:domain drone:ProductModel ;
+                 rdfs:range drone:Payload .
+
+
+###  http://www.dronetology.net/dronetology#hasRefuelingSystem
+drone:hasRefuelingSystem rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf drone:hasDirectPart ;
+                         owl:inverseOf drone:isRefuelingSystemOf ;
+                         rdfs:domain drone:ProductModel ;
+                         rdfs:range drone:RefuelingSystem .
+
+
+###  http://www.dronetology.net/dronetology#hasRotor
+drone:hasRotor rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf drone:hasDirectPart ;
+               owl:inverseOf drone:isRotorOf ;
+               rdfs:domain drone:ProductModel ;
+               rdfs:range drone:Rotor .
+
+
+###  http://www.dronetology.net/dronetology#hasSensor
+drone:hasSensor rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf drone:hasDirectPart ;
+                owl:inverseOf drone:isSensorOf ;
+                rdfs:domain drone:ProductModel ;
+                rdfs:range drone:Sensor .
+
+
+###  http://www.dronetology.net/dronetology#hasWing
+drone:hasWing rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf drone:hasDirectPart ;
+              owl:inverseOf drone:isWingOf ;
+              rdfs:domain drone:ProductModel ;
+              rdfs:range drone:Wing .
+
+
+###  http://www.dronetology.net/dronetology#isAntennaOf
+drone:isAntennaOf rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf drone:isDirectPartOf ;
+                  rdfs:domain drone:Antenna ;
+                  rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#isBatteryOf
+drone:isBatteryOf rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf drone:isDirectPartOf ;
+                  rdfs:domain drone:Battery ;
+                  rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#isChargingStationOf
+drone:isChargingStationOf rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf drone:isDirectPartOf ;
+                          rdfs:domain drone:ChargingStation ;
+                          rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#isCombustionEngineOf
+drone:isCombustionEngineOf rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf drone:isDirectPartOf ;
+                           rdfs:domain drone:CombustionEngine ;
+                           rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#isDataProcessingBoard
+drone:isDataProcessingBoard rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf drone:isDirectPartOf ;
+                            rdfs:domain drone:DataProcessingBoard ;
+                            rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#isDataStorageOf
+drone:isDataStorageOf rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf drone:isDirectPartOf ;
+                      rdfs:domain drone:DataStorage ;
+                      rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#isDirectPartOf
+drone:isDirectPartOf rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf drone:isPartOf ;
+                     rdfs:domain drone:Component ;
+                     rdfs:range drone:Component .
+
+
+###  http://www.dronetology.net/dronetology#isElectricalEngineOf
+drone:isElectricalEngineOf rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf drone:isDirectPartOf ;
+                           rdfs:domain drone:ElectricalEngine ;
+                           rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#isFlightControllerOf
+drone:isFlightControllerOf rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf drone:isDirectPartOf ;
+                           rdfs:domain drone:FlightController ;
+                           rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#isFuelTankOf
+drone:isFuelTankOf rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf drone:isDirectPartOf ;
+                   rdfs:domain drone:FuelTank ;
+                   rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#isFuselageOf
+drone:isFuselageOf rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf drone:isDirectPartOf ;
+                   rdfs:domain drone:Fuselage ;
+                   rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#isGroundStationOf
+drone:isGroundStationOf rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf drone:isDirectPartOf ;
+                        rdfs:domain drone:GroundStation ;
+                        rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#isInertialNavigationSystemOf
+drone:isInertialNavigationSystemOf rdf:type owl:ObjectProperty ;
+                                   rdfs:subPropertyOf drone:isDirectPartOf ;
+                                   rdfs:domain drone:InertialNavigationSystem ;
+                                   rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#isLandingSystemOf
+drone:isLandingSystemOf rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf drone:isDirectPartOf ;
+                        rdfs:domain drone:LandingSystem ;
+                        rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#isLaunchSystemOf
+drone:isLaunchSystemOf rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf drone:isDirectPartOf ;
+                       rdfs:domain drone:LaunchSystem ;
+                       rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#isMissionOf
+drone:isMissionOf rdf:type owl:ObjectProperty ;
+                  rdfs:domain drone:Mission ;
+                  rdfs:range drone:Drone .
+
+
+###  http://www.dronetology.net/dronetology#isModelOf
+drone:isModelOf rdf:type owl:ObjectProperty ;
+                rdfs:domain drone:ProductModel ;
+                rdfs:range drone:Drone .
+
+
+###  http://www.dronetology.net/dronetology#isPartOf
+drone:isPartOf rdf:type owl:ObjectProperty ,
+                        owl:TransitiveProperty ;
+               rdfs:domain drone:Component ;
+               rdfs:range drone:Component .
+
+
+###  http://www.dronetology.net/dronetology#isPayloadOf
+drone:isPayloadOf rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf drone:isDirectPartOf ;
+                  rdfs:domain drone:Payload ;
+                  rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#isRecordedBy
+drone:isRecordedBy rdf:type owl:ObjectProperty ;
+                   owl:inverseOf drone:records ;
+                   rdfs:domain drone:Video ;
+                   rdfs:range drone:VideoCamera .
+
+
+###  http://www.dronetology.net/dronetology#isRefuelingSystemOf
+drone:isRefuelingSystemOf rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf drone:isDirectPartOf ;
+                          rdfs:domain drone:RefuelingSystem ;
+                          rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#isRotorOf
+drone:isRotorOf rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf drone:isDirectPartOf ;
+                rdfs:domain drone:Rotor ;
+                rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#isSensorOf
+drone:isSensorOf rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf drone:isDirectPartOf ;
+                 rdfs:domain drone:Sensor ;
+                 rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#isStoredIn
+drone:isStoredIn rdf:type owl:ObjectProperty ;
+                 owl:inverseOf drone:stores ;
+                 rdfs:domain drone:Media ,
+                             drone:Mission ;
+                 rdfs:range drone:StorageDevice .
+
+
+###  http://www.dronetology.net/dronetology#isTakenWith
+drone:isTakenWith rdf:type owl:ObjectProperty ;
+                  owl:inverseOf drone:takes ;
+                  rdfs:domain drone:Photo ;
+                  rdfs:range drone:Camera .
+
+
+###  http://www.dronetology.net/dronetology#isVariantOf
+drone:isVariantOf rdf:type owl:ObjectProperty ;
+                  rdfs:domain drone:ProductModel ;
+                  rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#isWingOf
+drone:isWingOf rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf drone:isDirectPartOf ;
+               rdfs:domain drone:Wing ;
+               rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#predecessorOf
+drone:predecessorOf rdf:type owl:ObjectProperty ;
+                    rdfs:domain drone:ProductModel ;
+                    rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#records
+drone:records rdf:type owl:ObjectProperty ;
+              rdfs:domain drone:VideoCamera ;
+              rdfs:range drone:Video .
+
+
+###  http://www.dronetology.net/dronetology#satisfies
+drone:satisfies rdf:type owl:ObjectProperty ;
+                rdfs:domain drone:Component ;
+                rdfs:range drone:Requirement .
+
+
+###  http://www.dronetology.net/dronetology#satisfiesReq
+drone:satisfiesReq rdf:type owl:ObjectProperty .
+
+
+###  http://www.dronetology.net/dronetology#stores
+drone:stores rdf:type owl:ObjectProperty ;
+             rdfs:domain drone:StorageDevice ;
+             rdfs:range drone:Constraint ,
+                        drone:Media ,
+                        drone:Mission ,
+                        drone:Parameter .
+
+
+###  http://www.dronetology.net/dronetology#successorOf
+drone:successorOf rdf:type owl:ObjectProperty ;
+                  rdfs:domain drone:ProductModel ;
+                  rdfs:range drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#takes
+drone:takes rdf:type owl:ObjectProperty ;
+            rdfs:domain drone:Camera ;
+            rdfs:range drone:Photo .
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#location
+wgs84_pos:location rdfs:range wgs84_pos:SpatialThing .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.dronetology.net/dronetology#hasAircraftIP
+drone:hasAircraftIP rdf:type owl:DatatypeProperty ;
+                    rdfs:domain drone:CommunicationSystem ;
+                    rdfs:range xsd:string .
+
+
+###  http://www.dronetology.net/dronetology#hasAircraftMAC
+drone:hasAircraftMAC rdf:type owl:DatatypeProperty ;
+                     rdfs:domain drone:CommunicationSystem ;
+                     rdfs:range xsd:string .
+
+
+###  http://www.dronetology.net/dronetology#hasAlarmLevel
+drone:hasAlarmLevel rdf:type owl:DatatypeProperty ;
+                    rdfs:domain drone:Alarm ;
+                    rdfs:range xsd:int .
+
+
+###  http://www.dronetology.net/dronetology#hasAuthorityID
+drone:hasAuthorityID rdf:type owl:DatatypeProperty ;
+                     rdfs:range xsd:string .
+
+
+###  http://www.dronetology.net/dronetology#hasCommandID
+drone:hasCommandID rdf:type owl:DatatypeProperty ;
+                   rdfs:domain drone:Command ;
+                   rdfs:range xsd:int .
+
+
+###  http://www.dronetology.net/dronetology#hasCommandLine
+drone:hasCommandLine rdf:type owl:DatatypeProperty ;
+                     rdfs:domain drone:Command ;
+                     rdfs:range xsd:string .
+
+
+###  http://www.dronetology.net/dronetology#hasCommandVX
+drone:hasCommandVX rdf:type owl:DatatypeProperty ;
+                   rdfs:domain drone:InferredVelocityCommand ;
+                   rdfs:range xsd:float .
+
+
+###  http://www.dronetology.net/dronetology#hasCommandVY
+drone:hasCommandVY rdf:type owl:DatatypeProperty ;
+                   rdfs:domain drone:InferredVelocityCommand ;
+                   rdfs:range xsd:float .
+
+
+###  http://www.dronetology.net/dronetology#hasCommandVZ
+drone:hasCommandVZ rdf:type owl:DatatypeProperty ;
+                   rdfs:domain drone:InferredVelocityCommand ;
+                   rdfs:range xsd:float .
+
+
+###  http://www.dronetology.net/dronetology#hasDepth
+drone:hasDepth rdf:type owl:DatatypeProperty ;
+               rdfs:domain drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#hasDroneIdentificator
+drone:hasDroneIdentificator rdf:type owl:DatatypeProperty ;
+                            rdfs:domain drone:Drone ;
+                            rdfs:range xsd:string .
+
+
+###  http://www.dronetology.net/dronetology#hasExecutionTime
+drone:hasExecutionTime rdf:type owl:DatatypeProperty ;
+                       rdfs:domain drone:Command ;
+                       rdfs:range xsd:dateTimeStamp .
+
+
+###  http://www.dronetology.net/dronetology#hasFlightAuthorization
+drone:hasFlightAuthorization rdf:type owl:DatatypeProperty ;
+                             rdfs:domain drone:Drone ;
+                             rdfs:range xsd:string .
+
+
+###  http://www.dronetology.net/dronetology#hasFlightTime
+drone:hasFlightTime rdf:type owl:DatatypeProperty ;
+                    rdfs:domain drone:Command ;
+                    rdfs:range xsd:dateTimeStamp .
+
+
+###  http://www.dronetology.net/dronetology#hasGroundStationIP
+drone:hasGroundStationIP rdf:type owl:DatatypeProperty ;
+                         rdfs:domain drone:GroundStationCommunicationSystem ;
+                         rdfs:range xsd:string .
+
+
+###  http://www.dronetology.net/dronetology#hasGroundStationMAC
+drone:hasGroundStationMAC rdf:type owl:DatatypeProperty ;
+                          rdfs:domain drone:GroundStationCommunicationSystem ;
+                          rdfs:range xsd:string .
+
+
+###  http://www.dronetology.net/dronetology#hasHeight
+drone:hasHeight rdf:type owl:DatatypeProperty ;
+                rdfs:domain drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#hasLatLon
+drone:hasLatLon rdf:type owl:DatatypeProperty ;
+                rdfs:domain drone:WayPoint ;
+                rdfs:range xsd:string .
+
+
+###  http://www.dronetology.net/dronetology#hasLowerValue
+drone:hasLowerValue rdf:type owl:DatatypeProperty ;
+                    rdfs:domain drone:Constraint ;
+                    rdfs:range xsd:float .
+
+
+###  http://www.dronetology.net/dronetology#hasMissionAuthorizationID
+drone:hasMissionAuthorizationID rdf:type owl:DatatypeProperty ;
+                                rdfs:domain drone:Mission ;
+                                rdfs:range xsd:string .
+
+
+###  http://www.dronetology.net/dronetology#hasMissionID
+drone:hasMissionID rdf:type owl:DatatypeProperty ;
+                   rdfs:domain drone:Mission ;
+                   rdfs:range xsd:string .
+
+
+###  http://www.dronetology.net/dronetology#hasNetworkMask
+drone:hasNetworkMask rdf:type owl:DatatypeProperty ;
+                     rdfs:range xsd:string .
+
+
+###  http://www.dronetology.net/dronetology#hasNextCommand
+drone:hasNextCommand rdf:type owl:DatatypeProperty ;
+                     rdfs:domain drone:Command ;
+                     rdfs:range xsd:int .
+
+
+###  http://www.dronetology.net/dronetology#hasOwnerIdentificator
+drone:hasOwnerIdentificator rdf:type owl:DatatypeProperty ;
+                            rdfs:domain drone:ProductModel ;
+                            rdfs:range xsd:string .
+
+
+###  http://www.dronetology.net/dronetology#hasParameterUnit
+drone:hasParameterUnit rdf:type owl:DatatypeProperty ;
+                       rdfs:domain drone:Parameter ;
+                       rdfs:range xsd:string .
+
+
+###  http://www.dronetology.net/dronetology#hasParameterValue
+drone:hasParameterValue rdf:type owl:DatatypeProperty ;
+                        rdfs:domain drone:Parameter ;
+                        rdfs:range xsd:float .
+
+
+###  http://www.dronetology.net/dronetology#hasPlannedExecutionTime
+drone:hasPlannedExecutionTime rdf:type owl:DatatypeProperty ;
+                              rdfs:domain drone:Command ;
+                              rdfs:range xsd:dateTimeStamp .
+
+
+###  http://www.dronetology.net/dronetology#hasPlannedFlightTime
+drone:hasPlannedFlightTime rdf:type owl:DatatypeProperty ;
+                           rdfs:domain drone:Command ;
+                           rdfs:range xsd:dateTimeStamp .
+
+
+###  http://www.dronetology.net/dronetology#hasProductID
+drone:hasProductID rdf:type owl:DatatypeProperty ;
+                   rdfs:domain drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#hasUpperValue
+drone:hasUpperValue rdf:type owl:DatatypeProperty ;
+                    rdfs:domain drone:Constraint ;
+                    rdfs:range xsd:float .
+
+
+###  http://www.dronetology.net/dronetology#hasWeight
+drone:hasWeight rdf:type owl:DatatypeProperty ;
+                rdfs:domain drone:HardwareComponent ,
+                            drone:ProductModel ;
+                rdfs:range xsd:float .
+
+
+###  http://www.dronetology.net/dronetology#hasWidth
+drone:hasWidth rdf:type owl:DatatypeProperty ;
+               rdfs:domain drone:ProductModel .
+
+
+###  http://www.dronetology.net/dronetology#isOutOfRange
+drone:isOutOfRange rdf:type owl:DatatypeProperty ;
+                   rdfs:range xsd:boolean .
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#alt
+wgs84_pos:alt rdfs:domain wgs84_pos:SpatialThing ;
+              rdfs:comment """The WGS84 altitude of a SpatialThing (decimal meters 
+above the local reference ellipsoid).""" ;
+              rdfs:label "altitude" .
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#lat
+wgs84_pos:lat rdfs:domain wgs84_pos:SpatialThing ;
+              rdfs:range xsd:float ;
+              rdfs:comment "The WGS84 latitude of a SpatialThing (decimal degrees)." ;
+              rdfs:label "latitude" .
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#lat_long
+wgs84_pos:lat_long rdf:type owl:DatatypeProperty ;
+                   rdfs:domain wgs84_pos:SpatialThing ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "A comma-separated representation of a latitude, longitude coordinate." ;
+                   rdfs:label "lat/long" .
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#long
+wgs84_pos:long rdfs:domain wgs84_pos:SpatialThing ;
+               rdfs:range xsd:float ;
+               rdfs:comment "The WGS84 longitude of a SpatialThing (decimal degrees)." ;
+               rdfs:label "longitude" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.dronetology.net/dronetology#Accelerometer
+drone:Accelerometer rdf:type owl:Class ;
+                    rdfs:subClassOf drone:InertialNavigationSystem .
+
+
+###  http://www.dronetology.net/dronetology#AirCraft
+drone:AirCraft rdf:type owl:Class ;
+               rdfs:subClassOf drone:HardwareComponent ;
+               owl:disjointWith drone:AirCraftComponent ,
+                                drone:EnergyReloadSystem ,
+                                drone:GroundStation ,
+                                drone:GroundStationComponent ,
+                                drone:LaunchSystem .
+
+
+###  http://www.dronetology.net/dronetology#AirCraftComponent
+drone:AirCraftComponent rdf:type owl:Class ;
+                        rdfs:subClassOf drone:HardwareComponent ;
+                        owl:disjointWith drone:EnergyReloadSystem ,
+                                         drone:GroundStation ,
+                                         drone:GroundStationComponent ,
+                                         drone:LaunchSystem .
+
+
+###  http://www.dronetology.net/dronetology#Alarm
+drone:Alarm rdf:type owl:Class ;
+            rdfs:subClassOf drone:MissionElement .
+
+
+###  http://www.dronetology.net/dronetology#Antenna
+drone:Antenna rdf:type owl:Class ;
+              rdfs:subClassOf drone:AirCraftComponent ;
+              owl:disjointWith drone:CommunicationSystem ,
+                               drone:DataProcessingBoard ,
+                               drone:DataStorage ,
+                               drone:EnergyStorageComponent ,
+                               drone:Engine ,
+                               drone:FlightController ,
+                               drone:Fuselage ,
+                               drone:InertialNavigationSystem ,
+                               drone:LandingSystem ,
+                               drone:LiftGeneratorSystem ,
+                               drone:Payload ,
+                               drone:Sensor .
+
+
+###  http://www.dronetology.net/dronetology#AutoMode
+drone:AutoMode rdf:type owl:Class ;
+               rdfs:subClassOf drone:FlightMode .
+
+
+###  http://www.dronetology.net/dronetology#AuxiliaryCommand
+drone:AuxiliaryCommand rdf:type owl:Class ;
+                       rdfs:subClassOf drone:FlightPlanCommand ;
+                       owl:disjointWith drone:InferredCommand ,
+                                        drone:NavigationCommand .
+
+
+###  http://www.dronetology.net/dronetology#Battery
+drone:Battery rdf:type owl:Class ;
+              rdfs:subClassOf drone:EnergyStorageComponent ;
+              owl:disjointWith drone:FuelTank .
+
+
+###  http://www.dronetology.net/dronetology#BatteryAlarm
+drone:BatteryAlarm rdf:type owl:Class ;
+                   rdfs:subClassOf drone:Alarm ;
+                   owl:disjointWith drone:ObstacleAlarm .
+
+
+###  http://www.dronetology.net/dronetology#Cabin
+drone:Cabin rdf:type owl:Class ;
+            rdfs:subClassOf drone:Fuselage ;
+            owl:disjointWith drone:ConstantSection ,
+                             drone:FrameKit ,
+                             drone:Nose ,
+                             drone:Tail .
+
+
+###  http://www.dronetology.net/dronetology#Camera
+drone:Camera rdf:type owl:Class ;
+             rdfs:subClassOf drone:Payload .
+
+
+###  http://www.dronetology.net/dronetology#Category
+drone:Category rdf:type owl:Class .
+
+
+###  http://www.dronetology.net/dronetology#ChargingStation
+drone:ChargingStation rdf:type owl:Class ;
+                      rdfs:subClassOf drone:EnergyReloadSystem ;
+                      owl:disjointWith drone:RefuelingSystem .
+
+
+###  http://www.dronetology.net/dronetology#CombustionEngine
+drone:CombustionEngine rdf:type owl:Class ;
+                       rdfs:subClassOf drone:Engine ;
+                       owl:disjointWith drone:ElectricalEngine .
+
+
+###  http://www.dronetology.net/dronetology#Command
+drone:Command rdf:type owl:Class ;
+              rdfs:subClassOf drone:MissionElement .
+
+
+###  http://www.dronetology.net/dronetology#CommunicationSystem
+drone:CommunicationSystem rdf:type owl:Class ;
+                          rdfs:subClassOf drone:AirCraftComponent ;
+                          owl:disjointWith drone:DataProcessingBoard ,
+                                           drone:DataStorage ,
+                                           drone:EnergyStorageComponent ,
+                                           drone:Engine ,
+                                           drone:FlightController ,
+                                           drone:Fuselage ,
+                                           drone:InertialNavigationSystem ,
+                                           drone:LandingSystem ,
+                                           drone:LiftGeneratorSystem ,
+                                           drone:Payload ,
+                                           drone:Sensor .
+
+
+###  http://www.dronetology.net/dronetology#ComplianceRules
+drone:ComplianceRules rdf:type owl:Class ;
+                      rdfs:subClassOf drone:MissionElement .
+
+
+###  http://www.dronetology.net/dronetology#Component
+drone:Component rdf:type owl:Class .
+
+
+###  http://www.dronetology.net/dronetology#ConstantSection
+drone:ConstantSection rdf:type owl:Class ;
+                      rdfs:subClassOf drone:Fuselage ;
+                      owl:disjointWith drone:FrameKit ,
+                                       drone:Nose ,
+                                       drone:Tail .
+
+
+###  http://www.dronetology.net/dronetology#Constraint
+drone:Constraint rdf:type owl:Class .
+
+
+###  http://www.dronetology.net/dronetology#CruisePlan
+drone:CruisePlan rdf:type owl:Class ;
+                 rdfs:subClassOf drone:PartialFlightPlan .
+
+
+###  http://www.dronetology.net/dronetology#DataProcessingBoard
+drone:DataProcessingBoard rdf:type owl:Class ;
+                          rdfs:subClassOf drone:AirCraftComponent ;
+                          owl:disjointWith drone:DataStorage ,
+                                           drone:EnergyStorageComponent ,
+                                           drone:Engine ,
+                                           drone:FlightController ,
+                                           drone:Fuselage ,
+                                           drone:InertialNavigationSystem ,
+                                           drone:LandingSystem ,
+                                           drone:LiftGeneratorSystem ,
+                                           drone:Payload ,
+                                           drone:Sensor .
+
+
+###  http://www.dronetology.net/dronetology#DataProcessingSystem
+drone:DataProcessingSystem rdf:type owl:Class ;
+                           rdfs:subClassOf drone:GroundStationComponent ;
+                           owl:disjointWith drone:DataStorageSystem ,
+                                            drone:GroundStationAntenna ,
+                                            drone:GroundStationCommunicationSystem ,
+                                            drone:MissionCommanderStation ,
+                                            drone:PayloadOperatorStation ,
+                                            drone:RemotePilotConsole .
+
+
+###  http://www.dronetology.net/dronetology#DataStorage
+drone:DataStorage rdf:type owl:Class ;
+                  rdfs:subClassOf drone:AirCraftComponent ;
+                  owl:disjointWith drone:EnergyStorageComponent ,
+                                   drone:Engine ,
+                                   drone:FlightController ,
+                                   drone:Fuselage ,
+                                   drone:InertialNavigationSystem ,
+                                   drone:LandingSystem ,
+                                   drone:LiftGeneratorSystem ,
+                                   drone:Payload ,
+                                   drone:Sensor .
+
+
+###  http://www.dronetology.net/dronetology#DataStorageSystem
+drone:DataStorageSystem rdf:type owl:Class ;
+                        rdfs:subClassOf drone:GroundStationComponent ;
+                        owl:disjointWith drone:GroundStationAntenna ,
+                                         drone:GroundStationCommunicationSystem ,
+                                         drone:MissionCommanderStation ,
+                                         drone:PayloadOperatorStation ,
+                                         drone:RemotePilotConsole .
+
+
+###  http://www.dronetology.net/dronetology#Drone
+drone:Drone rdf:type owl:Class ;
+            owl:equivalentClass drone:UAS ,
+                                drone:UAV ;
+            rdfs:subClassOf wgs84_pos:SpatialThing .
+
+
+###  http://www.dronetology.net/dronetology#DronetologyAlarm
+drone:DronetologyAlarm rdf:type owl:Class ;
+                       rdfs:subClassOf drone:Alarm .
+
+
+###  http://www.dronetology.net/dronetology#DronetologyParameter
+drone:DronetologyParameter rdf:type owl:Class ;
+                           rdfs:subClassOf drone:Parameter .
+
+
+###  http://www.dronetology.net/dronetology#ElectricalEngine
+drone:ElectricalEngine rdf:type owl:Class ;
+                       rdfs:subClassOf drone:Engine .
+
+
+###  http://www.dronetology.net/dronetology#EnergyReloadSystem
+drone:EnergyReloadSystem rdf:type owl:Class ;
+                         rdfs:subClassOf drone:HardwareComponent ;
+                         owl:disjointWith drone:GroundStation ,
+                                          drone:GroundStationComponent ,
+                                          drone:LaunchSystem .
+
+
+###  http://www.dronetology.net/dronetology#EnergyStorageComponent
+drone:EnergyStorageComponent rdf:type owl:Class ;
+                             rdfs:subClassOf drone:AirCraftComponent ;
+                             owl:disjointWith drone:Engine ,
+                                              drone:FlightController ,
+                                              drone:Fuselage ,
+                                              drone:InertialNavigationSystem ,
+                                              drone:LandingSystem ,
+                                              drone:LiftGeneratorSystem ,
+                                              drone:Payload ,
+                                              drone:Sensor .
+
+
+###  http://www.dronetology.net/dronetology#Engine
+drone:Engine rdf:type owl:Class ;
+             rdfs:subClassOf drone:AirCraftComponent ;
+             owl:disjointWith drone:FlightController ,
+                              drone:Fuselage ,
+                              drone:InertialNavigationSystem ,
+                              drone:LandingSystem ,
+                              drone:LiftGeneratorSystem ,
+                              drone:Payload ,
+                              drone:Sensor .
+
+
+###  http://www.dronetology.net/dronetology#Feature
+drone:Feature rdf:type owl:Class .
+
+
+###  http://www.dronetology.net/dronetology#FirstCommand
+drone:FirstCommand rdf:type owl:Class ;
+                   rdfs:subClassOf drone:FlightPlanCommand ;
+                   owl:disjointWith drone:LastCommand .
+
+
+###  http://www.dronetology.net/dronetology#FixedWingCraft
+drone:FixedWingCraft rdf:type owl:Class ;
+                     rdfs:subClassOf drone:Category .
+
+
+###  http://www.dronetology.net/dronetology#Flight
+drone:Flight rdf:type owl:Class ;
+             owl:equivalentClass drone:Mission .
+
+
+###  http://www.dronetology.net/dronetology#FlightController
+drone:FlightController rdf:type owl:Class ;
+                       rdfs:subClassOf drone:AirCraftComponent ;
+                       owl:disjointWith drone:Fuselage ,
+                                        drone:InertialNavigationSystem ,
+                                        drone:LandingSystem ,
+                                        drone:LiftGeneratorSystem ,
+                                        drone:Payload ,
+                                        drone:Sensor .
+
+
+###  http://www.dronetology.net/dronetology#FlightMode
+drone:FlightMode rdf:type owl:Class ;
+                 rdfs:subClassOf drone:MissionElement .
+
+
+###  http://www.dronetology.net/dronetology#FlightPlan
+drone:FlightPlan rdf:type owl:Class ;
+                 rdfs:subClassOf drone:MissionElement ;
+                 rdfs:comment "Not an input because autonomous drone can fly without an ad-hoc flight plan"^^xsd:string .
+
+
+###  http://www.dronetology.net/dronetology#FlightPlanCommand
+drone:FlightPlanCommand rdf:type owl:Class ;
+                        rdfs:subClassOf drone:Command .
+
+
+###  http://www.dronetology.net/dronetology#FlightTrack
+drone:FlightTrack rdf:type owl:Class ;
+                  rdfs:subClassOf drone:MissionElement ;
+                  rdfs:comment "flight track sequence" .
+
+
+###  http://www.dronetology.net/dronetology#FlyZone
+drone:FlyZone rdf:type owl:Class ;
+              rdfs:subClassOf drone:MissionElement ,
+                              wgs84_pos:SpatialThing ;
+              owl:disjointWith drone:NoFlyZone .
+
+
+###  http://www.dronetology.net/dronetology#Formation
+drone:Formation rdf:type owl:Class ;
+                rdfs:subClassOf drone:FlightMode .
+
+
+###  http://www.dronetology.net/dronetology#FrameKit
+drone:FrameKit rdf:type owl:Class ;
+               rdfs:subClassOf drone:Fuselage ;
+               owl:disjointWith drone:Nose ,
+                                drone:Tail .
+
+
+###  http://www.dronetology.net/dronetology#FuelTank
+drone:FuelTank rdf:type owl:Class ;
+               rdfs:subClassOf drone:EnergyStorageComponent .
+
+
+###  http://www.dronetology.net/dronetology#Function
+drone:Function rdf:type owl:Class .
+
+
+###  http://www.dronetology.net/dronetology#Fuselage
+drone:Fuselage rdf:type owl:Class ;
+               rdfs:subClassOf drone:AirCraftComponent ;
+               owl:disjointWith drone:InertialNavigationSystem ,
+                                drone:LandingSystem ,
+                                drone:LiftGeneratorSystem ,
+                                drone:Payload ,
+                                drone:Sensor .
+
+
+###  http://www.dronetology.net/dronetology#GearBox
+drone:GearBox rdf:type owl:Class ;
+              rdfs:subClassOf drone:RotorComponent ;
+              owl:disjointWith drone:Propeller ,
+                               drone:Rotor .
+
+
+###  http://www.dronetology.net/dronetology#GoToCommand
+drone:GoToCommand rdf:type owl:Class ;
+                  rdfs:subClassOf drone:NavigationCommand .
+
+
+###  http://www.dronetology.net/dronetology#GroundStation
+drone:GroundStation rdf:type owl:Class ;
+                    rdfs:subClassOf drone:HardwareComponent ;
+                    owl:disjointWith drone:GroundStationComponent ,
+                                     drone:LaunchSystem .
+
+
+###  http://www.dronetology.net/dronetology#GroundStationAntenna
+drone:GroundStationAntenna rdf:type owl:Class ;
+                           rdfs:subClassOf drone:GroundStationComponent ;
+                           owl:disjointWith drone:GroundStationCommunicationSystem ,
+                                            drone:MissionCommanderStation ,
+                                            drone:PayloadOperatorStation ,
+                                            drone:RemotePilotConsole .
+
+
+###  http://www.dronetology.net/dronetology#GroundStationCommunicationSystem
+drone:GroundStationCommunicationSystem rdf:type owl:Class ;
+                                       rdfs:subClassOf drone:GroundStationComponent ;
+                                       owl:disjointWith drone:MissionCommanderStation ,
+                                                        drone:PayloadOperatorStation ,
+                                                        drone:RemotePilotConsole .
+
+
+###  http://www.dronetology.net/dronetology#GroundStationComponent
+drone:GroundStationComponent rdf:type owl:Class ;
+                             rdfs:subClassOf drone:HardwareComponent ;
+                             owl:disjointWith drone:LaunchSystem .
+
+
+###  http://www.dronetology.net/dronetology#GuidedMode
+drone:GuidedMode rdf:type owl:Class ;
+                 rdfs:subClassOf drone:FlightMode .
+
+
+###  http://www.dronetology.net/dronetology#Gyroscope
+drone:Gyroscope rdf:type owl:Class ;
+                rdfs:subClassOf drone:InertialNavigationSystem .
+
+
+###  http://www.dronetology.net/dronetology#HardwareComponent
+drone:HardwareComponent rdf:type owl:Class ;
+                        rdfs:subClassOf drone:Component ,
+                                        wgs84_pos:SpatialThing .
+
+
+###  http://www.dronetology.net/dronetology#HomeLocation
+drone:HomeLocation rdf:type owl:Class ;
+                   rdfs:subClassOf drone:WayPoint .
+
+
+###  http://www.dronetology.net/dronetology#ImageSensor
+drone:ImageSensor rdf:type owl:Class ;
+                  rdfs:subClassOf drone:Sensor .
+
+
+###  http://www.dronetology.net/dronetology#InertialNavigationSystem
+drone:InertialNavigationSystem rdf:type owl:Class ;
+                               rdfs:subClassOf drone:AirCraftComponent ;
+                               owl:disjointWith drone:LandingSystem ,
+                                                drone:LiftGeneratorSystem ,
+                                                drone:Payload ,
+                                                drone:Sensor .
+
+
+###  http://www.dronetology.net/dronetology#InferredCommand
+drone:InferredCommand rdf:type owl:Class ;
+                      rdfs:subClassOf drone:Command .
+
+
+###  http://www.dronetology.net/dronetology#InferredVelocityCommand
+drone:InferredVelocityCommand rdf:type owl:Class ;
+                              rdfs:subClassOf drone:InferredCommand ;
+                              owl:disjointWith drone:InferredWayPoint .
+
+
+###  http://www.dronetology.net/dronetology#InferredWayPoint
+drone:InferredWayPoint rdf:type owl:Class ;
+                       rdfs:subClassOf drone:InferredCommand .
+
+
+###  http://www.dronetology.net/dronetology#LandingFeet
+drone:LandingFeet rdf:type owl:Class ;
+                  rdfs:subClassOf drone:LandingSystem .
+
+
+###  http://www.dronetology.net/dronetology#LandingGear
+drone:LandingGear rdf:type owl:Class ;
+                  rdfs:subClassOf drone:LandingSystem .
+
+
+###  http://www.dronetology.net/dronetology#LandingLeg
+drone:LandingLeg rdf:type owl:Class ;
+                 rdfs:subClassOf drone:LandingSystem .
+
+
+###  http://www.dronetology.net/dronetology#LandingPlan
+drone:LandingPlan rdf:type owl:Class ;
+                  rdfs:subClassOf drone:PartialFlightPlan .
+
+
+###  http://www.dronetology.net/dronetology#LandingSystem
+drone:LandingSystem rdf:type owl:Class ;
+                    rdfs:subClassOf drone:AirCraftComponent ;
+                    owl:disjointWith drone:LiftGeneratorSystem ,
+                                     drone:Payload ,
+                                     drone:Sensor .
+
+
+###  http://www.dronetology.net/dronetology#LandingWheel
+drone:LandingWheel rdf:type owl:Class ;
+                   rdfs:subClassOf drone:LandingSystem .
+
+
+###  http://www.dronetology.net/dronetology#LastCommand
+drone:LastCommand rdf:type owl:Class ;
+                  rdfs:subClassOf drone:FlightPlanCommand .
+
+
+###  http://www.dronetology.net/dronetology#LaunchSystem
+drone:LaunchSystem rdf:type owl:Class ;
+                   rdfs:subClassOf drone:HardwareComponent .
+
+
+###  http://www.dronetology.net/dronetology#LiftGeneratorSystem
+drone:LiftGeneratorSystem rdf:type owl:Class ;
+                          rdfs:subClassOf drone:AirCraftComponent ;
+                          owl:disjointWith drone:Payload ,
+                                           drone:Sensor .
+
+
+###  http://www.dronetology.net/dronetology#Manufacturer
+drone:Manufacturer rdf:type owl:Class .
+
+
+###  http://www.dronetology.net/dronetology#Media
+drone:Media rdf:type owl:Class ;
+            rdfs:subClassOf drone:MissionElement ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty drone:isStoredIn ;
+                              owl:someValuesFrom drone:StorageDevice
+                            ] .
+
+
+###  http://www.dronetology.net/dronetology#Mission
+drone:Mission rdf:type owl:Class ;
+              rdfs:comment "only one mission can be stored in copter, is a multiple command sequence"^^xsd:string .
+
+
+###  http://www.dronetology.net/dronetology#MissionCommanderStation
+drone:MissionCommanderStation rdf:type owl:Class ;
+                              rdfs:subClassOf drone:GroundStationComponent ;
+                              owl:disjointWith drone:PayloadOperatorStation ,
+                                               drone:RemotePilotConsole .
+
+
+###  http://www.dronetology.net/dronetology#MissionElement
+drone:MissionElement rdf:type owl:Class .
+
+
+###  http://www.dronetology.net/dronetology#NEDVelocityCommand
+drone:NEDVelocityCommand rdf:type owl:Class ;
+                         rdfs:subClassOf drone:NavigationCommand .
+
+
+###  http://www.dronetology.net/dronetology#NavigationCommand
+drone:NavigationCommand rdf:type owl:Class ;
+                        rdfs:subClassOf drone:FlightPlanCommand .
+
+
+###  http://www.dronetology.net/dronetology#NoFlyZone
+drone:NoFlyZone rdf:type owl:Class ;
+                rdfs:subClassOf drone:MissionElement ,
+                                wgs84_pos:SpatialThing .
+
+
+###  http://www.dronetology.net/dronetology#NoFlyZoneAlarm
+drone:NoFlyZoneAlarm rdf:type owl:Class ;
+                     rdfs:subClassOf drone:Alarm .
+
+
+###  http://www.dronetology.net/dronetology#Nose
+drone:Nose rdf:type owl:Class ;
+           rdfs:subClassOf drone:Fuselage ;
+           owl:disjointWith drone:Tail .
+
+
+###  http://www.dronetology.net/dronetology#Obstacle
+drone:Obstacle rdf:type owl:Class ;
+               rdfs:subClassOf <http://www.loa-cnr.it/ontologies/DUL.owl#PhysicalObject> .
+
+
+###  http://www.dronetology.net/dronetology#ObstacleAlarm
+drone:ObstacleAlarm rdf:type owl:Class ;
+                    rdfs:subClassOf drone:Alarm .
+
+
+###  http://www.dronetology.net/dronetology#ObstacleDetectionSensor
+drone:ObstacleDetectionSensor rdf:type owl:Class ;
+                              rdfs:subClassOf drone:Sensor .
+
+
+###  http://www.dronetology.net/dronetology#Operator
+drone:Operator rdf:type owl:Class ;
+               rdfs:subClassOf drone:MissionElement .
+
+
+###  http://www.dronetology.net/dronetology#Parameter
+drone:Parameter rdf:type owl:Class .
+
+
+###  http://www.dronetology.net/dronetology#PartialFlightPlan
+drone:PartialFlightPlan rdf:type owl:Class ;
+                        rdfs:subClassOf drone:FlightPlan .
+
+
+###  http://www.dronetology.net/dronetology#Payload
+drone:Payload rdf:type owl:Class ;
+              rdfs:subClassOf drone:AirCraftComponent ;
+              owl:disjointWith drone:Sensor .
+
+
+###  http://www.dronetology.net/dronetology#PayloadOperatorStation
+drone:PayloadOperatorStation rdf:type owl:Class ;
+                             rdfs:subClassOf drone:GroundStationComponent ;
+                             owl:disjointWith drone:RemotePilotConsole .
+
+
+###  http://www.dronetology.net/dronetology#Photo
+drone:Photo rdf:type owl:Class ;
+            rdfs:subClassOf drone:Media ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty drone:isTakenWith ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onClass drone:Camera
+                            ] ;
+            owl:disjointWith drone:Video .
+
+
+###  http://www.dronetology.net/dronetology#ProductModel
+drone:ProductModel rdf:type owl:Class ;
+                   rdfs:subClassOf drone:Component .
+
+
+###  http://www.dronetology.net/dronetology#Propeller
+drone:Propeller rdf:type owl:Class ;
+                rdfs:subClassOf drone:RotorComponent ;
+                owl:disjointWith drone:Rotor .
+
+
+###  http://www.dronetology.net/dronetology#RPAS
+drone:RPAS rdf:type owl:Class ;
+           rdfs:subClassOf drone:UAS .
+
+
+###  http://www.dronetology.net/dronetology#RefuelingSystem
+drone:RefuelingSystem rdf:type owl:Class ;
+                      rdfs:subClassOf drone:EnergyReloadSystem .
+
+
+###  http://www.dronetology.net/dronetology#RemotePilotConsole
+drone:RemotePilotConsole rdf:type owl:Class ;
+                         rdfs:subClassOf drone:GroundStationComponent .
+
+
+###  http://www.dronetology.net/dronetology#RemoteSensor
+drone:RemoteSensor rdf:type owl:Class ;
+                   rdfs:subClassOf <http://purl.oclc.org/NET/ssnx/ssn#SensingDevice> .
+
+
+###  http://www.dronetology.net/dronetology#Requirement
+drone:Requirement rdf:type owl:Class .
+
+
+###  http://www.dronetology.net/dronetology#Rotor
+drone:Rotor rdf:type owl:Class ;
+            rdfs:subClassOf drone:LiftGeneratorSystem ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty drone:hasPart ;
+                              owl:allValuesFrom drone:RotorComponent
+                            ] ;
+            owl:disjointWith drone:Wing .
+
+
+###  http://www.dronetology.net/dronetology#RotorComponent
+drone:RotorComponent rdf:type owl:Class ;
+                     rdfs:subClassOf drone:LiftGeneratorSystem .
+
+
+###  http://www.dronetology.net/dronetology#RotorCraft
+drone:RotorCraft rdf:type owl:Class ;
+                 rdfs:subClassOf drone:Category .
+
+
+###  http://www.dronetology.net/dronetology#Schedule
+drone:Schedule rdf:type owl:Class ;
+               rdfs:subClassOf drone:MissionElement .
+
+
+###  http://www.dronetology.net/dronetology#Sensor
+drone:Sensor rdf:type owl:Class ;
+             rdfs:subClassOf <http://purl.oclc.org/NET/ssnx/ssn#SensingDevice> ,
+                             drone:AirCraftComponent .
+
+
+###  http://www.dronetology.net/dronetology#SmartPhone
+drone:SmartPhone rdf:type owl:Class ;
+                 rdfs:subClassOf drone:RemotePilotConsole .
+
+
+###  http://www.dronetology.net/dronetology#SoftwareComponent
+drone:SoftwareComponent rdf:type owl:Class ;
+                        rdfs:subClassOf drone:Component .
+
+
+###  http://www.dronetology.net/dronetology#SpeedController
+drone:SpeedController rdf:type owl:Class ;
+                      rdfs:subClassOf drone:FlightController .
+
+
+###  http://www.dronetology.net/dronetology#StorageDevice
+drone:StorageDevice rdf:type owl:Class ;
+                    rdfs:subClassOf drone:DataStorage .
+
+
+###  http://www.dronetology.net/dronetology#Tablet
+drone:Tablet rdf:type owl:Class ;
+             rdfs:subClassOf drone:RemotePilotConsole .
+
+
+###  http://www.dronetology.net/dronetology#Tail
+drone:Tail rdf:type owl:Class ;
+           rdfs:subClassOf drone:Fuselage .
+
+
+###  http://www.dronetology.net/dronetology#TakeoffPlan
+drone:TakeoffPlan rdf:type owl:Class ;
+                  rdfs:subClassOf drone:PartialFlightPlan .
+
+
+###  http://www.dronetology.net/dronetology#Telemetry
+drone:Telemetry rdf:type owl:Class ;
+                rdfs:subClassOf drone:MissionElement .
+
+
+###  http://www.dronetology.net/dronetology#UAS
+drone:UAS rdf:type owl:Class ;
+          owl:equivalentClass drone:UAV .
+
+
+###  http://www.dronetology.net/dronetology#UAV
+drone:UAV rdf:type owl:Class .
+
+
+###  http://www.dronetology.net/dronetology#VTOLCraft
+drone:VTOLCraft rdf:type owl:Class ;
+                rdfs:subClassOf drone:Category .
+
+
+###  http://www.dronetology.net/dronetology#Video
+drone:Video rdf:type owl:Class ;
+            rdfs:subClassOf drone:Media ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty drone:isRecordedBy ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onClass drone:VideoCamera
+                            ] .
+
+
+###  http://www.dronetology.net/dronetology#VideoCamera
+drone:VideoCamera rdf:type owl:Class ;
+                  rdfs:subClassOf drone:Payload .
+
+
+###  http://www.dronetology.net/dronetology#WayPoint
+drone:WayPoint rdf:type owl:Class ;
+               rdfs:subClassOf drone:MissionElement ,
+                               wgs84_pos:Point .
+
+
+###  http://www.dronetology.net/dronetology#Wing
+drone:Wing rdf:type owl:Class ;
+           rdfs:subClassOf drone:LiftGeneratorSystem ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty drone:hasPart ;
+                             owl:allValuesFrom drone:WingComponent
+                           ] .
+
+
+###  http://www.dronetology.net/dronetology#WingComponent
+drone:WingComponent rdf:type owl:Class ;
+                    rdfs:subClassOf drone:LiftGeneratorSystem .
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#Point
+wgs84_pos:Point rdf:type owl:Class ;
+                rdfs:subClassOf wgs84_pos:SpatialThing ;
+                rdfs:comment """ 
+Uniquely identified by lat/long/alt. i.e.
+
+spaciallyIntersects(P1, P2) :- lat(P1, LAT), long(P1, LONG), alt(P1, ALT),
+  lat(P2, LAT), long(P2, LONG), alt(P2, ALT).
+
+sameThing(P1, P2) :- type(P1, Point), type(P2, Point), spaciallyIntersects(P1, P2).
+  """ ,
+                             """A point, typically described using a coordinate system relative to Earth, such as WGS84.
+  """ ;
+                rdfs:label "point" .
+
+
+###  http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing
+wgs84_pos:SpatialThing rdf:type owl:Class ;
+                       rdfs:comment """Anything with spatial extent, i.e. size, shape, or position.
+ e.g. people, places, bowling balls, as well as abstract areas like cubes.
+""" ;
+                       rdfs:label "SpatialThing" .
+
+
+###  http://www.w3.org/2006/time#ProperInterval
+<http://www.w3.org/2006/time#ProperInterval> rdf:type owl:Class .
+
+
+###  https://www.auto.tuwien.ac.at/downloads/thinkhome/ontology/WeatherOntology.owl#WeatherReport
+WeatherOntology:WeatherReport rdfs:subClassOf drone:MissionElement .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.dronetology.net/dronetology#APM2.6
+drone:APM2.6 rdf:type owl:NamedIndividual ,
+                      drone:Sensor .
+
+
+###  http://www.dronetology.net/dronetology#BirdsEyeView
+drone:BirdsEyeView rdf:type owl:NamedIndividual ,
+                            drone:Manufacturer .
+
+
+###  http://www.dronetology.net/dronetology#DJI
+drone:DJI rdf:type owl:NamedIndividual ,
+                   drone:Manufacturer .
+
+
+###  http://www.dronetology.net/dronetology#VTOLCraft
+drone:VTOLCraft rdf:type owl:NamedIndividual ,
+                         drone:Category .
+
+
+###  http://www.dronetology.net/dronetology#alarm1
+drone:alarm1 rdf:type owl:NamedIndividual ,
+                      drone:ObstacleAlarm .
+
+
+###  http://www.dronetology.net/dronetology#arduIMU
+drone:arduIMU rdf:type owl:NamedIndividual ,
+                       drone:FlightController .
+
+
+###  http://www.dronetology.net/dronetology#arduinoUNOR3
+drone:arduinoUNOR3 rdf:type owl:NamedIndividual ,
+                            drone:FlightController .
+
+
+###  http://www.dronetology.net/dronetology#batteryRange
+drone:batteryRange rdf:type owl:NamedIndividual ,
+                            drone:Constraint .
+
+
+###  http://www.dronetology.net/dronetology#bluetoothDataLink
+drone:bluetoothDataLink rdf:type owl:NamedIndividual ,
+                                 drone:CommunicationSystem .
+
+
+###  http://www.dronetology.net/dronetology#bluetoothModule
+drone:bluetoothModule rdf:type owl:NamedIndividual ,
+                               drone:GroundStationCommunicationSystem .
+
+
+###  http://www.dronetology.net/dronetology#boschBMA150
+drone:boschBMA150 rdf:type owl:NamedIndividual ,
+                           drone:Accelerometer .
+
+
+###  http://www.dronetology.net/dronetology#cameraControlStation
+drone:cameraControlStation rdf:type owl:NamedIndividual ,
+                                    drone:PayloadOperatorStation .
+
+
+###  http://www.dronetology.net/dronetology#catapult
+drone:catapult rdf:type owl:NamedIndividual ,
+                        drone:LaunchSystem .
+
+
+###  http://www.dronetology.net/dronetology#charger
+drone:charger rdf:type owl:NamedIndividual ,
+                       drone:ChargingStation .
+
+
+###  http://www.dronetology.net/dronetology#currentMission
+drone:currentMission rdf:type owl:NamedIndividual ,
+                              drone:Mission .
+
+
+###  http://www.dronetology.net/dronetology#djiAceOne
+drone:djiAceOne rdf:type owl:NamedIndividual ,
+                         drone:FlightController .
+
+
+###  http://www.dronetology.net/dronetology#djiGroundStation
+drone:djiGroundStation rdf:type owl:NamedIndividual ,
+                                drone:GroundStation .
+
+
+###  http://www.dronetology.net/dronetology#epsonXV3700
+drone:epsonXV3700 rdf:type owl:NamedIndividual ,
+                           drone:Gyroscope .
+
+
+###  http://www.dronetology.net/dronetology#fireFLY6VTOLFrame
+drone:fireFLY6VTOLFrame rdf:type owl:NamedIndividual ,
+                                 drone:FrameKit .
+
+
+###  http://www.dronetology.net/dronetology#fixedWingCraft
+drone:fixedWingCraft rdf:type owl:NamedIndividual ,
+                              drone:Category .
+
+
+###  http://www.dronetology.net/dronetology#gcsAntenna
+drone:gcsAntenna rdf:type owl:NamedIndividual ,
+                          drone:GroundStationAntenna .
+
+
+###  http://www.dronetology.net/dronetology#goPro
+drone:goPro rdf:type owl:NamedIndividual ,
+                     drone:Payload .
+
+
+###  http://www.dronetology.net/dronetology#helionHLNA0105
+drone:helionHLNA0105 rdf:type owl:NamedIndividual ,
+                              drone:GearBox .
+
+
+###  http://www.dronetology.net/dronetology#hitecHS-7235MH
+drone:hitecHS-7235MH rdf:type owl:NamedIndividual ,
+                              drone:Engine .
+
+
+###  http://www.dronetology.net/dronetology#hobbyWingXRotor10A
+drone:hobbyWingXRotor10A rdf:type owl:NamedIndividual ,
+                                  drone:SpeedController .
+
+
+###  http://www.dronetology.net/dronetology#idg500
+drone:idg500 rdf:type owl:NamedIndividual ,
+                      drone:Gyroscope .
+
+
+###  http://www.dronetology.net/dronetology#interval1
+drone:interval1 rdf:type owl:NamedIndividual ,
+                         <http://www.w3.org/2006/time#ProperInterval> ;
+                WeatherOntology:hasEndTime "4.0"^^xsd:float ;
+                WeatherOntology:hasStartTime "2.0"^^xsd:float .
+
+
+###  http://www.dronetology.net/dronetology#linxMotion2800mAh
+drone:linxMotion2800mAh rdf:type owl:NamedIndividual ,
+                                 drone:Battery .
+
+
+###  http://www.dronetology.net/dronetology#navigateTo1
+drone:navigateTo1 rdf:type owl:NamedIndividual ,
+                           drone:GoToCommand .
+
+
+###  http://www.dronetology.net/dronetology#navigateTo2
+drone:navigateTo2 rdf:type owl:NamedIndividual ,
+                           drone:GoToCommand .
+
+
+###  http://www.dronetology.net/dronetology#notwaypoint
+drone:notwaypoint rdf:type owl:NamedIndividual ,
+                           wgs84_pos:Point ;
+                  wgs84_pos:lat "2.0"^^xsd:float ;
+                  wgs84_pos:long "2.0"^^xsd:float .
+
+
+###  http://www.dronetology.net/dronetology#nxtCamv4
+drone:nxtCamv4 rdf:type owl:NamedIndividual ,
+                        drone:Sensor .
+
+
+###  http://www.dronetology.net/dronetology#obstacleRange
+drone:obstacleRange rdf:type owl:NamedIndividual ,
+                             drone:Constraint .
+
+
+###  http://www.dronetology.net/dronetology#operator1
+drone:operator1 rdf:type owl:NamedIndividual ,
+                         drone:Operator .
+
+
+###  http://www.dronetology.net/dronetology#parrotWIFIAntenna
+drone:parrotWIFIAntenna rdf:type owl:NamedIndividual ,
+                                 drone:Antenna .
+
+
+###  http://www.dronetology.net/dronetology#pcRemoteConsole
+drone:pcRemoteConsole rdf:type owl:NamedIndividual ,
+                               drone:RemotePilotConsole .
+
+
+###  http://www.dronetology.net/dronetology#pcStation
+drone:pcStation rdf:type owl:NamedIndividual ,
+                         drone:MissionCommanderStation .
+
+
+###  http://www.dronetology.net/dronetology#point1
+drone:point1 rdf:type owl:NamedIndividual ,
+                      drone:WayPoint ;
+             drone:hasLatLon "1,2"^^xsd:string ;
+             wgs84_pos:lat "1.0"^^xsd:float ;
+             wgs84_pos:long "1.0"^^xsd:float .
+
+
+###  http://www.dronetology.net/dronetology#point2
+drone:point2 rdf:type owl:NamedIndividual ,
+                      drone:WayPoint ;
+             drone:hasLatLon "1,1"^^xsd:string ;
+             wgs84_pos:lat "1.0"^^xsd:float ;
+             wgs84_pos:long "1.0"^^xsd:float .
+
+
+###  http://www.dronetology.net/dronetology#powerDistributionBoard
+drone:powerDistributionBoard rdf:type owl:NamedIndividual ,
+                                      drone:SpeedController .
+
+
+###  http://www.dronetology.net/dronetology#quadKit
+drone:quadKit rdf:type owl:NamedIndividual ,
+                       drone:FrameKit .
+
+
+###  http://www.dronetology.net/dronetology#rotorCraft
+drone:rotorCraft rdf:type owl:NamedIndividual ,
+                          drone:Category .
+
+
+###  http://www.dronetology.net/dronetology#rotronRT300
+drone:rotronRT300 rdf:type owl:NamedIndividual ,
+                           drone:Engine .
+
+
+###  http://www.dronetology.net/dronetology#sdCard
+drone:sdCard rdf:type owl:NamedIndividual ,
+                      drone:DataStorageSystem .
+
+
+###  http://www.dronetology.net/dronetology#sonoQ-A1
+drone:sonoQ-A1 rdf:type owl:NamedIndividual ,
+                        drone:Sensor .
+
+
+###  http://www.dronetology.net/dronetology#spektrumDX7s
+drone:spektrumDX7s rdf:type owl:NamedIndividual ,
+                            drone:GroundStation .
+
+
+###  http://www.dronetology.net/dronetology#storm8045
+drone:storm8045 rdf:type owl:NamedIndividual ,
+                         drone:Propeller .
+
+
+###  http://www.dronetology.net/dronetology#takeOff
+drone:takeOff rdf:type owl:NamedIndividual ,
+                       drone:FirstCommand ,
+                       drone:NavigationCommand .
+
+
+###  http://www.dronetology.net/dronetology#velocity1
+drone:velocity1 rdf:type owl:NamedIndividual ,
+                         drone:InferredVelocityCommand .
+
+
+###  http://www.dronetology.net/dronetology#wifiModule
+drone:wifiModule rdf:type owl:NamedIndividual ,
+                          drone:GroundStationCommunicationSystem .
+
+
+###  http://www.dronetology.net/dronetology#3DRPixHawk
+drone:DRPixHawk rdf:type owl:NamedIndividual ,
+                         drone:FlightController .
+
+
+###  http://www.dronetology.net/dronetology#3DRobotics
+drone:DRobotics rdf:type owl:NamedIndividual ,
+                         drone:Manufacturer .
+
+
+###  http://www.dronetology.net/dronetology#3W-112iB4HFEFI
+drone:W-112iB4HFEFI rdf:type owl:NamedIndividual ,
+                             drone:Engine .
+
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+] .
+
+#################################################################
+#    Annotations
+#################################################################
+
+wgs84_pos: dc:date "$Date: 2009/04/20 15:00:30 $" ;
+            rdfs:label "geo" ;
+            dc:description """A vocabulary for representing latitude, longitude and 
+ altitude information in the WGS84 geodetic reference datum. 
+ Version $Id: wgs84_pos.rdf,v 1.22 2009/04/20 15:00:30 timbl Exp $. See http://www.w3.org/2003/01/geo/ for more details.""" ;
+            rdfs:comment """
+Recent changes to this namespace:
+$Log: wgs84_pos.rdf,v $
+Revision 1.22  2009/04/20 15:00:30  timbl
+Remove the time bits which have been deal with elsewhere eg in iCal.
+
+Revision 1.21  2009/04/20 12:52:47  timbl
+try again
+
+Revision 1.20  2009/04/20 12:42:11  timbl
+Add Event (edited ages ago and never checked in), and location (following discussion http://chatlogs.planetrdf.com/swig/2009-04-20#T12-36-09)
+
+Revision 1.19  2009/04/20 12:36:31  timbl
+Add Event (edited ages ago and never checked in), and location (following discussion http://chatlogs.planetrdf.com/swig/2009-04-20#T12-36-09)
+
+Revision 1.18  2006/02/01 22:01:04  danbri
+Clarified that lat and long are decimal degrees, and that alt is decimal metres about local reference ellipsoid
+
+Revision 1.17  2004/02/06 17:38:12  danbri
+Fixed a bad commit screwup
+
+Revision 1.15  2003/04/19 11:24:08  danbri
+Fixed the typo even more.
+
+Revision 1.14  2003/04/19 11:16:56  danbri
+fixed a typo
+
+Revision 1.13  2003/02/19 22:27:27  connolly
+relaxed domain constraints on lat/long/alt from Point to SpatialThing
+
+Revision 1.12  2003/01/12 01:41:41  danbri
+Trying local copy of XSLT doc.
+
+Revision 1.11  2003/01/12 01:20:18  danbri
+added a link to morten's xslt rdfs viewer.
+
+Revision 1.10  2003/01/11 18:56:49  danbri
+Removed datatype range from lat and long properties, since they would
+have required each occurance of the property to mention the datatype.
+
+Revision 1.9  2003/01/11 11:41:31  danbri
+Another typo; repaired rdfs:Property to rdf:Property x4
+
+Revision 1.8  2003/01/11 11:05:02  danbri
+Added an rdfs:range for each lat/long/alt property,
+http://www.w3.org/2001/XMLSchema#float
+
+Revision 1.7  2003/01/10 20:25:16  danbri
+Longer rdfs:comment for Point, trying to be Earth-centric and neutral about
+coordinate system(s) at the same time. Feedback welcomed.
+
+Revision 1.6  2003/01/10 20:18:30  danbri
+Added CVS log comments into the RDF/XML as an rdfs:comment property of the
+vocabulary. Note that this is not common practice (but seems both harmless
+and potentially useful).
+
+
+revision 1.5
+date: 2003/01/10 20:14:31;  author: danbri;  state: Exp;  lines: +16 -5
+Updated schema:
+Added a dc:date, added url for more info. Changed the rdfs:label of the
+namespace from gp to geo. Added a class Point, set as the rdfs:domain of
+each property. Added XML comment on the lat_long property suggesting that
+we might not need it (based on #rdfig commentary from implementors).
+
+revision 1.4
+date: 2003/01/10 20:01:07;  author: danbri;  state: Exp;  lines: +6 -5
+Fixed typo; several rdfs:about attributes are now rdf:about. Thanks to MortenF in
+#rdfig for catching this error.
+
+revision 1.3
+date: 2003/01/10 11:59:03;  author: danbri;  state: Exp;  lines: +4 -3
+fixed buglet in vocab, added more wgs links
+
+revision 1.2
+date: 2003/01/10 11:01:11;  author: danbri;  state: Exp;  lines: +4 -4
+Removed alt from the as-a-flat-string property, and switched from
+space separated to comma separated.
+
+revision 1.1
+date: 2003/01/10 10:53:23;  author: danbri;  state: Exp;
+basic geo vocab
+
+""" ;
+            dc:title "WGS84 Geo Positioning: an RDF vocabulary" .
+
+
+wgs84_pos:location rdfs:label "location" ;
+                   rdfs:comment """The relation between something and the point, 
+ or other geometrical thing in space, where it is.  For example, the realtionship between
+ a radio tower and a Point with a given lat and long.
+ Or a relationship between a park and its outline as a closed arc of points, or a road and
+ its location as a arc (a sequence of points).
+ Clearly in practice there will be limit to the accuracy of any such statement, but one would expect
+ an accuracy appropriate for the size of the object and uses such as mapping .
+ """ .
+
+
+###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi
